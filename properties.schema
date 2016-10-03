@@ -1,0 +1,373 @@
+{
+    "type":"object",
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "id": "http://jsonschema.net",
+    "required":false,
+    "properties":{
+      "pluginLocations": {
+        "type":"object",
+        "required":true,
+        "properties":{
+          "course": {
+            "type":"object",
+            "properties":{
+              "_achievements": {
+                "type":"object",
+                "required":false,
+                "legend": "Achievements",
+                "properties":{
+                  "_isEnabled": {
+                    "type":"boolean",
+                    "required":false,
+                    "default": false,
+                    "title": "Achievements Enabled",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Enables Achievements Extension"
+                  },
+                    "title": {
+                    "type": "string",
+                    "default":"Achievements",
+                    "required": true,
+                    "title": "",
+                    "inputType": "Text",
+                    "validators": ["required"]
+                  },
+                  "description": {
+                    "type": "string",
+                    "default":"Click here to view your achievements for this module.",
+                    "required": false,
+                    "title": "",
+                    "inputType": "Text",
+                    "validators": []
+                  },
+                  "_showOnNavbar": {
+                    "type":"boolean",
+                    "required":false,
+                    "default": true,
+                    "title": "Show Achievements Icon on the navigation bar",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": []
+                  },
+                  "_icon": {
+                    "type": "string",
+                    "required": true,
+                    "title": "Icon",
+                    "default": "icon-star",
+                    "inputType": "Text",
+                    "validators": []
+                  },
+                  "_countDown": {
+                    "type":"boolean",
+                    "required":true,
+                    "title": "Count Down",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Count down completion of achievements"
+                  },
+                  "_trackCorrect": {
+                    "type":"boolean",
+                    "required":true,
+                    "title": "Track Correct",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Track correctly answered questions to total up in the achievements"
+                  },
+                  "_trackPartlyCorrect": {
+                    "type":"boolean",
+                    "required":true,
+                    "title": "Track Partly Correct",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Track partly correct answered questions and score half a point as an achievement"
+                  },
+                  "_completionOnPassed": {
+                    "type":"boolean",
+                    "required":false,
+                    "default": false,
+                    "title": "Completion on Passed",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Tracks completion against the user passing the course assessment. If false the certificate is shown on topic completion"
+                  },
+                  "_usernameSettings": {
+                    "type":"object",
+                    "required":true,
+                    "title": "LMS Student name display settings",
+                    "properties":{
+                      "_isEnabled": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": false,
+                        "title": "Change display of student name enabled",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables the display of the student name to be customised"
+                      },
+                      "_splitNameAtComma": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": false,
+                        "title": "Remove the comma from the student name",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables the student name to be displayed without a comma"
+                      },
+                      "_splitNameAtSpace": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": false,
+                        "title": "Remove the blank space from the student name",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables the student name to be displayed without an extra space"
+                      },
+                      "_splitNameAtCommaSpace": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": false,
+                        "title": "Remove the comma and the blank space from the student name",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables the student name to be displayed without any extra spaces and a comma"
+                      },
+                      "_switchNames": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": false,
+                        "title": "Swap the order of the student name",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables the second entry in the student name to be displayed before the first entry"
+                      }
+                    }
+                  },
+                  "_completePrompt": {
+                    "type":"object",
+                    "required":true,
+                    "title": "Prompt for Completion",
+                    "properties":{
+                      "_isEnabled": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": true,
+                        "title": "Completion Prompt Enabled",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables a prompt to the user when the certificate is available"
+                      },
+                      "title": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Prompt title",
+                        "title": "Title",
+                        "inputType": "Text",
+                        "validators": []
+                      },
+                      "body": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Prompt body",
+                        "title": "Prompt body",
+                        "inputType": "Text",
+                        "validators": []
+                      },
+                      "_displayTime": {
+                        "type":"number",
+                        "required":true,
+                        "default":9000,
+                        "title": "Prompt Display Duration",
+                        "inputType":"Number",
+                        "validators": ["required", "number"],
+                        "help": "Set value to determine how long to show the prompt for"
+                      }
+                    }
+                  },
+                  "_drawer": {
+                    "type":"object",
+                    "required":true,
+                    "title": "Drawer Functionality",
+                    "properties":{
+                      "_isEnabled": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": true,
+                        "title": "Drawer Functionality Enabled",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables Drawer Functionality"
+                      },
+                      "achievementsTitle": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Drawer title",
+                        "title": "Achievements Title",
+                        "inputType": "Text",
+                        "validators": []
+                      },
+                      "achievementsBody": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Throughout this module you can collect {{{maxScore}}} stars. So far you have collected {{{score}}}.",
+                        "title": "Achievements Body",
+                        "inputType": "Text",
+                        "validators": [],
+                        "help": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available"
+                      },
+                      "certificateTitle": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Certificate drawer title",
+                        "title": "Certificate Drawer Title",
+                        "inputType": "Text",
+                        "validators": []
+                      },
+                      "certificateEnabled": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Certificate is enabled description",
+                        "title": "Description when certificate is unavailable",
+                        "inputType": "Text",
+                        "validators": []
+                      },
+                      "certificateDisabled": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Certificate is disabled description",
+                        "title": "Description when certificate is available to view",
+                        "inputType": "Text",
+                        "validators": []
+                      },
+                      "_buttons": {
+                        "type":"object",
+                        "required":true,
+                        "properties":{
+                          "view": {
+                            "type": "string",
+                            "required": true,
+                            "default": "View",
+                            "title": "View Button Text",
+                            "inputType": "Text",
+                            "validators": [],
+                            "help": "Enter the text for the button to view the certificate"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "_certificate": {
+                    "type":"object",
+                    "required":false,
+                    "title": "Certificate Graphics",
+                    "properties":{
+                      "_header": {
+                        "type":"string",
+                        "required":true,
+                        "default": "",
+                        "inputType": "Asset:image",
+                        "validators": []
+                      },
+                      "_body": {
+                        "type":"string",
+                        "required":true,
+                        "default": "",
+                        "inputType": "Asset:image",
+                        "validators": []
+                      },
+                      "_footer": {
+                        "type":"string",
+                        "required":true,
+                        "default": "",
+                        "inputType": "Asset:image",
+                        "validators": []
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "contentobject": {
+            "type":"object",
+            "properties":{
+
+            }
+          },
+          "article": {
+            "type":"object",
+            "properties":{
+
+            }
+          },
+          "block": {
+            "type":"object",
+            "properties":{
+
+            }
+          },
+          "component": {
+            "type":"object",
+            "properties":{
+              "_achievements": {
+                "type":"object",
+                "required":false,
+                "legend": "Achievements",
+                "properties":{
+                  "_isEnabled": {
+                    "type":"boolean",
+                    "required":false,
+                    "default": false,
+                    "title": "Achievements Enabled",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Enables Achievements on the Component"
+                  },
+                  "_showPrompt": {
+                    "type":"boolean",
+                    "required":false,
+                    "default": false,
+                    "title": "Completion Prompt Enabled",
+                    "inputType": { "type": "Boolean", "options": [false, true]},
+                    "validators": [],
+                    "help": "Enables Completion Prompt when the component comes in to view"
+                  },
+                  "_classes": {
+                    "type": "string",
+                    "required": false,
+                    "title": "Classes",
+                    "inputType": "Text",
+                    "validators": []
+                  },
+                  "_button": {
+                    "type": "object",
+                    "required": true,
+                    "properties": {
+                      "_isEnabled": {
+                        "type":"boolean",
+                        "required":false,
+                        "default": true,
+                        "title": "Certificate Button Enabled",
+                        "inputType": { "type": "Boolean", "options": [false, true]},
+                        "validators": [],
+                        "help": "Enables the Certificate Button on the Component"
+                      },
+                      "title": {
+                        "type": "string",
+                        "required": false,
+                        "default": "Button title",
+                        "title": "Button Title",
+                        "inputType": "TextArea",
+                        "validators": [],
+                        "help": "Title for the certificate button"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

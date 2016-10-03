@@ -1,0 +1,17 @@
+{
+  "name": "adapt-achievements",
+  "version": "2.0.1",
+  "framework": "^2.0.6",
+  "homepage": "https://github.com/deltanet/adapt-achievements",
+  "issues": "https://github.com/deltanet/adapt-achievements/issues",
+  "displayName" : "Achievements",
+  "extension" : "achievements",
+  "description": "An extension to track question componenets and add a course completion certificate.",
+  "main": "/js/adapt-achievements.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-extension"
+  ],
+  "license": "GPL-3.0",
+  "targetAttribute": "_achievements"
+}
