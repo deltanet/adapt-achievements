@@ -36,6 +36,12 @@ define([
     },
 
     setupAchievements: function() {
+      // Check if certificate is enabled
+      if (Adapt.course.get("_achievements")._certificate && Adapt.course.get("_achievements")._certificate._isEnabled) {
+        this.certificateEnabled = Adapt.course.get("_achievements")._certificate._isEnabled;
+      } else {
+        this.certificateEnabled = false;
+      }
       // Define achievements model
       Adapt.achievements = {};
       // Set vars for achievements data
@@ -56,27 +62,24 @@ define([
         Adapt.achievements.datePassed = Adapt.achievements.currentDate;
         Adapt.achievements.isAvailable = false;
       }
-      // Manipulate username if enabled
-      if (Adapt.course.get('_achievements')._usernameSettings._isEnabled) {
-        // Split at comma
-        if (Adapt.course.get('_achievements')._usernameSettings._splitNameAtComma) {
-          var nameArray = Adapt.achievements.userName.split(',');
-        }
-        // Split at space
-        if (Adapt.course.get('_achievements')._usernameSettings._splitNameAtSpace) {
-          var nameArray = Adapt.achievements.userName.split(' ');
-        }
-        // Split at comma with a space after it
-        if (Adapt.course.get('_achievements')._usernameSettings._splitNameAtCommaSpace) {
-          var nameArray = Adapt.achievements.userName.split(', ');
-        }
-        Adapt.achievements.userFirstname = nameArray[1];
-        Adapt.achievements.userSurname = nameArray[0];
-        if (Adapt.course.get('_achievements')._usernameSettings._switchNames) {
-          Adapt.achievements.userName = Adapt.achievements.userFirstname+" "+Adapt.achievements.userSurname;
-        } else {
-          Adapt.achievements.userName = Adapt.achievements.userSurname+" "+Adapt.achievements.userFirstname;
-        }
+      // Split at comma
+      if (Adapt.course.get('_achievements')._certificate._splitNameAt == "comma") {
+        var nameArray = Adapt.achievements.userName.split(',');
+      }
+      // Split at space
+      if (Adapt.course.get('_achievements')._certificate._splitNameAt == "space") {
+        var nameArray = Adapt.achievements.userName.split(' ');
+      }
+      // Split at comma with a space after it
+      if (Adapt.course.get('_achievements')._certificate._splitNameAt == "commaSpace") {
+        var nameArray = Adapt.achievements.userName.split(', ');
+      }
+      Adapt.achievements.userFirstname = nameArray[1];
+      Adapt.achievements.userSurname = nameArray[0];
+      if (Adapt.course.get('_achievements')._certificate._switchNames) {
+        Adapt.achievements.userName = Adapt.achievements.userFirstname+" "+Adapt.achievements.userSurname;
+      } else {
+        Adapt.achievements.userName = Adapt.achievements.userSurname+" "+Adapt.achievements.userFirstname;
       }
 
       // Define achievements model for all other views and components to reference
@@ -111,14 +114,12 @@ define([
     addAchievementsDrawerItem: function() {
       var drawerAchievements = Adapt.course.get('_achievements')._drawer;
 
-      if (this.achievementsEnabled && Adapt.course.get('_achievements')._drawer._isEnabled) {
-        var drawerObject = {
-              title: drawerAchievements.title,
-              description: drawerAchievements.description,
-              className: 'achievements-drawer'
-          };
-          Adapt.drawer.addItem(drawerObject, 'achievements:showAchievementsDrawer');
-      }
+      var drawerObject = {
+          title: drawerAchievements.title,
+          description: drawerAchievements.description,
+          className: 'achievements-drawer'
+      };
+      Adapt.drawer.addItem(drawerObject, 'achievements:showAchievementsDrawer');
     },
 
     setupDrawerAchievements: function() {
@@ -131,7 +132,7 @@ define([
     },
 
     onComponentReady: function(view) {
-      if (this.achievementsEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
+      if (this.achievementsEnabled && this.certificateEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
         try{
           new AchievementsComponentView({model:view.model});
         } catch(e){
@@ -177,7 +178,7 @@ define([
     },
 
     onContentCompletion: function() {
-      if(!Adapt.course.get('_achievements')._completionOnPassed) {
+      if(!Adapt.course.get('_achievements')._certificate._completionOnPassed) {
         Adapt.achievements.isAvailable = true;
         Adapt.trigger('achievements:showComponentButton');
         this.saveCompletionDate();
@@ -185,7 +186,7 @@ define([
     },
 
     onAssessmentCompletion: function() {
-      if(Adapt.course.get('_achievements')._completionOnPassed && Adapt.course.get('_isAssessmentPassed')) {
+      if(Adapt.course.get('_achievements')._certificate._completionOnPassed && Adapt.course.get('_isAssessmentPassed')) {
         Adapt.achievements.isAvailable = true;
         Adapt.trigger('achievements:showComponentButton');
         this.saveCompletionDate();

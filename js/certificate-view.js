@@ -40,9 +40,9 @@ define(function(require) {
         },
 
         populateCertificate: function() {
-          $('.certificate').find('.certificate-title').html(Adapt.certificate.courseTitle);
-          $('.certificate').find('.certificate-name').html(Adapt.certificate.userName);
-          $('.certificate').find('.certificate-date').html(Adapt.certificate.datePassed);
+          $('.certificate').find('.certificate-title').html(Adapt.achievements.courseTitle);
+          $('.certificate').find('.certificate-name').html(Adapt.achievements.userName);
+          $('.certificate').find('.certificate-date').html(Adapt.achievements.datePassed);
         },
 
         printCertificate: function(event) {

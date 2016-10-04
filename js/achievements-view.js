@@ -33,8 +33,8 @@ define(function(require) {
             // If countdown is enabled
             if(Adapt.course.get('_achievements')._countDown) {
                 // If the counter is to countdown when a question is correct
-                if(Adapt.course.get('_achievements')._trackCorrect) {
-                    if(Adapt.course.get('_achievements')._trackPartlyCorrect) {
+                if(Adapt.course.get('_achievements')._trackQuestion == "correct" || Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
+                    if(Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
                         score = score - (Adapt.achievements.questionComponents.where({_isCorrect: true}).length + ((Adapt.achievements.questionComponents.where({_isAtLeastOneCorrectSelection: true}).length)/2));
                     } else {
                         score = score - (Adapt.achievements.questionComponents.where({_isCorrect: true}).length);
@@ -47,8 +47,8 @@ define(function(require) {
                 // If countdown is NOT enabled just total up the number of correct answers
 
                 // If the counter is to countdown when a question is correct
-                if(Adapt.course.get('_achievements')._trackCorrect) {
-                    if(Adapt.course.get('_achievements')._trackPartlyCorrect) {
+                if(Adapt.course.get('_achievements')._trackQuestion == "correct" || Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
+                    if(Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
                         score = Adapt.achievements.questionComponents.where({_isCorrect: true}).length + ((Adapt.achievements.questionComponents.where({_isAtLeastOneCorrectSelection: true}).length)/2);
                     } else {
                         score = Adapt.achievements.questionComponents.where({_isCorrect: true}).length;

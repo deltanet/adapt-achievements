@@ -7,16 +7,7 @@
         "_showOnNavbar": true,
         "_icon": "icon-star",
         "_countDown": false,
-        "_trackCorrect": true,
-        "_trackPartlyCorrect": false,
-        "_completionOnPassed": true,
-        "_usernameSettings": {
-            "_isEnabled": true,
-            "_splitNameAtComma": false,
-            "_splitNameAtSpace": false,
-            "_splitNameAtCommaSpace": true,
-            "_switchNames": true
-        },
+        "_trackQuestion": "correct", // options are "correct" "incorrect" "partlyCorrect"
         "_completePrompt": {
             "_isEnabled": true,
             "title": "Certificate",
@@ -24,7 +15,6 @@
             "_displayTime": 9000
         },
         "_drawer": {
-            "_isEnabled": true,
             "_comment": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available",
             "achievementsTitle": "Achievements",
             "achievementsBody": "Throughout this module you can collect {{{maxScore}}} stars. So far you have collected {{{score}}}.",
@@ -36,6 +26,10 @@
             }
         },
         "_certificate": {
+            "_isEnabled": true,
+            "_completionOnPassed": true,
+            "_splitNameAt" : "comma", // options are "comma" "space" "commaSpace" "none"
+            "_switchNames": false,
             "_header": "course/en/images/certificateHeader.png",
             "_body": "course/en/images/certificateBody.png",
             "_footer": "course/en/images/certificateFooter.png"
