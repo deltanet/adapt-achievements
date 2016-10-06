@@ -8,13 +8,11 @@ define(function(require) {
         className: 'achievements',
 
         initialize: function(options) {
-            this.isExternallyUpdated = options.isExternallyUpdated;
-            if (this.isExternallyUpdated) {
-                this.listenTo(Adapt, 'achievements:set', this.render);
-            } else {
-                this.listenTo(Adapt.achievements.questionComponents, 'change:_isCorrect', this.render);
-            }
-            this.render();
+          this.listenTo(Adapt, 'remove', this.remove);
+          this.listenTo(Adapt, "device:resize", this.updateNavButton);
+          this.listenTo(Adapt, "device:changed", this.updateNavButton);
+          this.listenTo(Adapt.achievements.questionComponents, 'change:_isCorrect', this.render);
+          this.render();
         },
 
         events: {
@@ -59,27 +57,39 @@ define(function(require) {
                 }
             }
 
-            // Add to view if enabled
-            if(Adapt.course.get('_achievements')._showOnNavbar) {
-              var data = Adapt.achievements.questionComponents.toJSON();
-              var template = Handlebars.templates['achievementsToggle'];
-              this.$el.html(template({
-                  score: score,
-                  achievements:data
-              }));
-              // Add icon to button
-              this.$('.achievements-button').addClass(Adapt.course.get('_achievements')._icon);
-            }
+            var data = Adapt.achievements.questionComponents.toJSON();
+            var template = Handlebars.templates['achievementsToggle'];
+            this.$el.html(template({
+                score: score,
+                achievements:data
+            }));
+            // Add icon to button
+            this.$('.achievements-button').addClass(Adapt.course.get('_achievements')._icon);
 
             var str = Adapt.course.get('_achievements')._drawer.achievementsBody;
             Adapt.achievements.bodyText = str.replace(/{{{score}}}/g, score);
             Adapt.achievements.bodyText = Adapt.achievements.bodyText.replace(/{{{maxScore}}}/g, numQuestions);
 
+            this.updateNavButton();
+
+        },
+
+        updateNavButton: function() {
+          if(Adapt.course.get('_achievements')._showOnNavbar && Adapt.device.screenSize !== 'small') {
+            this.$('.achievements-toggle').removeClass('hidden');
+          } else {
+            this.$('.achievements-toggle').addClass('hidden');
+          }
         },
 
         openDrawer: function() {
           if (event) event.preventDefault();
             Adapt.trigger('achievements:showAchievementsDrawer');
+        },
+
+        remove: function() {
+          this.stopListening(Adapt, "device:resize", this.updateNavButton);
+          this.stopListening(Adapt, "device:changed", this.updateNavButton);
         }
 
     });
