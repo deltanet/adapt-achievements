@@ -112,7 +112,7 @@ define([
     },
 
     addAchievementsDrawerItem: function() {
-      var drawerAchievements = Adapt.course.get('_achievements')._drawer;
+      var drawerAchievements = Adapt.course.get('_achievements');
 
       var drawerObject = {
           title: drawerAchievements.title,
