@@ -113,12 +113,6 @@ body {
     }
 }
 
-.achievements-toggle {
-    &.hidden {
-        display: none;
-    }
-}
-
 .achievements-drawer {
     .drawer-item-open {
         width: 94% !important;
@@ -135,13 +129,37 @@ body {
     }
 }
 
+.achievements-toggle {
+    &.hidden {
+        display: none;
+    }
+}
+
 .achievements-component {
     .achievements-inner {
-        margin-top: @button-margin;
 		&.center {
 			text-align: center;
 		}
     }
+}
+
+.achievements-button {
+    float: left;
+    .dir-rtl & {
+        float: right;
+    }
+}
+
+.achievements-count {
+    padding-top: 5px;
+    color:@primary-color-inverted;
+    float: left;
+    .dir-rtl & {
+        float: right;
+    }
+    line-height: @sub-title-line-height;
+    font-weight: @font-weight-regular;
+    font-size: 16px;
 }
 
 // Ico moon font used for default certificate icon
@@ -183,31 +201,4 @@ body {
 }
 .icon-trophy:before {
   content: "\e90b";
-}
-
-
-.achievements-inner {
-    float: left;
-    .dir-rtl & {
-        float: right;
-    }
-}
-
-.achievements-button {
-    float: left;
-    .dir-rtl & {
-        float: right;
-    }
-}
-
-.achievements-count {
-    padding-top: 5px;
-    color:@primary-color-inverted;
-    float: left;
-    .dir-rtl & {
-        float: right;
-    }
-    line-height: @sub-title-line-height;
-    font-weight: @font-weight-regular;
-    font-size: 16px;
 }

@@ -44,6 +44,12 @@ define([
       }
       // Define achievements model
       Adapt.achievements = {};
+      // Set var for text string to go in the drawer
+      Adapt.achievements.bodyText = "";
+      // Get question components
+      Adapt.achievements.questionComponents;
+      Adapt.achievements.isExternallyUpdated = false;
+      Adapt.achievements.questionComponents = new Backbone.Collection(Adapt.components.where({_isQuestionType: true}));
       // Set vars for achievements data
       Adapt.achievements.courseTitle = Adapt.course.get('displayTitle');
       Adapt.achievements.userName = Adapt.offlineStorage.get("student");
@@ -62,6 +68,7 @@ define([
         Adapt.achievements.datePassed = Adapt.achievements.currentDate;
         Adapt.achievements.isAvailable = false;
       }
+      Adapt.achievements.isAvailable = true;
       // Split at comma
       if (Adapt.course.get('_achievements')._certificate._splitNameAt == "comma") {
         var nameArray = Adapt.achievements.userName.split(',');
@@ -81,15 +88,6 @@ define([
       } else {
         Adapt.achievements.userName = Adapt.achievements.userSurname+" "+Adapt.achievements.userFirstname;
       }
-
-      // Define achievements model for all other views and components to reference
-      Adapt.achievements = {};
-      Adapt.achievements.bodyText = "";
-      //Adapt.achievements.assessment = new Array();
-
-      Adapt.achievements.questionComponents;
-      Adapt.achievements.isExternallyUpdated = false;
-      Adapt.achievements.questionComponents = new Backbone.Collection(Adapt.components.where({_isQuestionType: true}));
 
       this.setupNavigationEvent();
 
@@ -148,11 +146,11 @@ define([
       } else {
         Adapt.achievements.userLocation = "";
       }
-      $('.achievements').removeClass('display-none');
+      $('.certificate').removeClass('display-none');
       $('.navigation').addClass('display-none');
       $('#wrapper').css('opacity',0);
       $('#wrapper').addClass('noprint');
-      Adapt.scrollTo($('.achievements'));
+      Adapt.scrollTo($('.certificate'));
     },
 
     printCertificate: function() {
@@ -160,7 +158,7 @@ define([
     },
 
     closeCertificate: function() {
-        $('.achievements').addClass('display-none');
+        $('.certificate').addClass('display-none');
         $('.navigation').removeClass('display-none');
         $('#wrapper').css('opacity',1);
         $('#wrapper').removeClass('noprint');
