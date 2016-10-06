@@ -68,7 +68,6 @@ define([
         Adapt.achievements.datePassed = Adapt.achievements.currentDate;
         Adapt.achievements.isAvailable = false;
       }
-      Adapt.achievements.isAvailable = true;
       // Split at comma
       if (Adapt.course.get('_achievements')._certificate._splitNameAt == "comma") {
         var nameArray = Adapt.achievements.userName.split(',');
