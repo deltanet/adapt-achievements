@@ -31,7 +31,8 @@
                   "required": true,
                   "title": "",
                   "inputType": "Text",
-                  "validators": ["required"]
+                  "validators": ["required"],
+                  "translatable": true
                 },
                 "description": {
                   "type": "string",
@@ -39,7 +40,8 @@
                   "required": false,
                   "title": "",
                   "inputType": "Text",
-                  "validators": []
+                  "validators": [],
+                  "translatable": true
                 },
                 "_showOnNavbar": {
                   "type":"boolean",
@@ -103,7 +105,8 @@
                       "default": "Prompt title",
                       "title": "Title",
                       "inputType": "Text",
-                      "validators": []
+                      "validators": [],
+                      "translatable": true
                     },
                     "body": {
                       "type": "string",
@@ -111,7 +114,8 @@
                       "default": "Prompt body",
                       "title": "Prompt body",
                       "inputType": "Text",
-                      "validators": []
+                      "validators": [],
+                      "translatable": true
                     },
                     "_displayTime": {
                       "type":"number",
@@ -135,7 +139,8 @@
                       "default": "Drawer title",
                       "title": "Achievements Title",
                       "inputType": "Text",
-                      "validators": []
+                      "validators": [],
+                      "translatable": true
                     },
                     "achievementsBody": {
                       "type": "string",
@@ -144,7 +149,8 @@
                       "title": "Achievements Body",
                       "inputType": "Text",
                       "validators": [],
-                      "help": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available"
+                      "help": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available",
+                      "translatable": true
                     },
                     "certificateTitle": {
                       "type": "string",
@@ -152,7 +158,8 @@
                       "default": "Certificate drawer title",
                       "title": "Certificate Drawer Title",
                       "inputType": "Text",
-                      "validators": []
+                      "validators": [],
+                      "translatable": true
                     },
                     "certificateEnabled": {
                       "type": "string",
@@ -181,7 +188,8 @@
                           "title": "View Button Text",
                           "inputType": "Text",
                           "validators": [],
-                          "help": "Enter the text for the button to view the certificate"
+                          "help": "Enter the text for the button to view the certificate",
+                          "translatable": true
                         }
                       }
                     }
@@ -326,7 +334,8 @@
                       "title": "Button Title",
                       "inputType": "TextArea",
                       "validators": [],
-                      "help": "Title for the certificate button"
+                      "help": "Title for the certificate button",
+                      "translatable": true
                     }
                   }
                 }
