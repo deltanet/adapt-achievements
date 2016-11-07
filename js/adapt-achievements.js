@@ -145,9 +145,10 @@ define([
       } else {
         Adapt.achievements.userLocation = "";
       }
+      Adapt.trigger('audio:pauseAudio', 0);
       $('.certificate').removeClass('display-none');
       $('.navigation').addClass('display-none');
-      $('#wrapper').css('opacity',0);
+      $('#wrapper').css('visibility','hidden');
       $('#wrapper').addClass('noprint');
       Adapt.scrollTo($('.certificate'));
     },
@@ -159,11 +160,13 @@ define([
     closeCertificate: function() {
         $('.certificate').addClass('display-none');
         $('.navigation').removeClass('display-none');
-        $('#wrapper').css('opacity',1);
         $('#wrapper').removeClass('noprint');
         if(Adapt.achievements.view == "page" && !Adapt.achievements.userLocation == "") {
           Adapt.scrollTo($("."+Adapt.achievements.userLocation));
         }
+        _.defer(_.bind(function() {
+            $('#wrapper').css('visibility','visible');
+        }, this));
     },
 
     setCurrentDate: function() {
