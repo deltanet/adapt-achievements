@@ -26,7 +26,7 @@ To be written
 <div float align=right><a href="#top">Back to Top</a></div>
 
 ----------------------------
-**Version number:**  2.0.0   
+**Version number:**  2.0.2   
 **Framework versions supported:**  ^2.0.6    
 **Author / maintainer:** DeltaNet [contributors](https://github.com/deltanet/adapt-achievements/graphs/contributors)     
 **Accessibility support:** Yes  
