@@ -19,8 +19,21 @@ body {
     }
 
     .certificate-toolbar {
-        padding: 5px;
-        background-color: @navigation-color;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .dir-rtl & {
+            right: auto;
+            left: 0;
+        }
+    }
+
+    .toolbar-button {
+        color: @button-text-color;
+        float: left;
+        .dir-rtl & {
+            float:right;
+        }
     }
 
     .certificate-header {
