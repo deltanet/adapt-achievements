@@ -8,6 +8,9 @@
       "type":"object",
       "required":true,
       "properties":{
+        "config": {
+          "type":"object"
+        },
         "course": {
           "type":"object",
           "properties":{
@@ -209,7 +212,7 @@
                       "validators": [],
                       "help": "Enables the certificate"
                     },
-                    "_isEnabled": {
+                    "_completionOnPassed": {
                       "type":"boolean",
                       "required":false,
                       "default": true,
