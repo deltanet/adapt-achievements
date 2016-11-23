@@ -243,22 +243,28 @@
                       "type":"string",
                       "required":true,
                       "default": "",
+                      "title": "Header",
                       "inputType": "Asset:image",
-                      "validators": []
+                      "validators": [],
+                      "help": "Add a header image for the certificate"
                     },
                     "_body": {
                       "type":"string",
                       "required":true,
                       "default": "",
+                      "title": "Body",
                       "inputType": "Asset:image",
-                      "validators": []
+                      "validators": [],
+                      "help": "Add a main body background image for the certificate"
                     },
                     "_footer": {
                       "type":"string",
                       "required":true,
                       "default": "",
+                      "title": "Footer",
                       "inputType": "Asset:image",
-                      "validators": []
+                      "validators": [],
+                      "help": "Add a footer image for the certificate"
                     }
                   }
                 }
