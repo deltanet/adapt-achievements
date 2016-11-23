@@ -79,15 +79,6 @@
                   "validators": [],
                   "help": "Track the specified status of the answered questions to total up in the achievements"
                 },
-                "_completionOnPassed": {
-                  "type":"boolean",
-                  "required":false,
-                  "default": false,
-                  "title": "Completion on Passed",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
-                  "validators": [],
-                  "help": "Tracks completion against the user passing the course assessment. If false the certificate is shown on topic completion"
-                },
                 "_completePrompt": {
                   "type":"object",
                   "required":true,
