@@ -68,20 +68,29 @@ define([
         Adapt.achievements.datePassed = Adapt.achievements.currentDate;
         Adapt.achievements.isAvailable = false;
       }
+
+      var nameArray = [];
+
       // Split at comma
       if (Adapt.course.get('_achievements')._certificate._splitNameAt == "comma") {
-        var nameArray = Adapt.achievements.userName.split(',');
+        nameArray = Adapt.achievements.userName.split(',');
       }
       // Split at space
       if (Adapt.course.get('_achievements')._certificate._splitNameAt == "space") {
-        var nameArray = Adapt.achievements.userName.split(' ');
+        nameArray = Adapt.achievements.userName.split(' ');
       }
       // Split at comma with a space after it
       if (Adapt.course.get('_achievements')._certificate._splitNameAt == "commaSpace") {
-        var nameArray = Adapt.achievements.userName.split(', ');
+        nameArray = Adapt.achievements.userName.split(', ');
       }
-      Adapt.achievements.userFirstname = nameArray[1];
-      Adapt.achievements.userSurname = nameArray[0];
+      if (nameArray.length > 0) {
+        Adapt.achievements.userFirstname = nameArray[1];
+        Adapt.achievements.userSurname = nameArray[0];
+      } else {
+        Adapt.achievements.userFirstname = "name";
+        Adapt.achievements.userSurname = "unknown";
+      }
+
       if (Adapt.course.get('_achievements')._certificate._switchNames) {
         Adapt.achievements.userName = Adapt.achievements.userFirstname+" "+Adapt.achievements.userSurname;
       } else {
