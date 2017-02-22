@@ -6,7 +6,7 @@
   "issues": "https://github.com/deltanet/adapt-achievements/issues",
   "displayName" : "Achievements",
   "extension" : "achievements",
-  "description": "An extension to track question componenets and add a course completion certificate.",
+  "description": "An extension to track question components and add a course completion certificate.",
   "main": "/js/adapt-achievements.js",
   "keywords": [
     "adapt-plugin",
