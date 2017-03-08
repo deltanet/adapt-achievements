@@ -23,7 +23,7 @@
                   "type":"boolean",
                   "required":false,
                   "default": false,
-                  "title": "Achievements Enabled",
+                  "title": "Is Enabled",
                   "inputType": { "type": "Boolean", "options": [false, true]},
                   "validators": [],
                   "help": "Enables Achievements Extension"
@@ -34,7 +34,7 @@
                   "required": true,
                   "title": "",
                   "inputType": "Text",
-                  "validators": ["required"],
+                  "validators": [],
                   "translatable": true
                 },
                 "description": {
@@ -87,7 +87,7 @@
                     "_isEnabled": {
                       "type":"boolean",
                       "required":false,
-                      "default": true,
+                      "default": false,
                       "title": "Completion Prompt Enabled",
                       "inputType": { "type": "Boolean", "options": [false, true]},
                       "validators": [],
@@ -96,7 +96,7 @@
                     "title": {
                       "type": "string",
                       "required": false,
-                      "default": "Prompt title",
+                      "default": "",
                       "title": "Title",
                       "inputType": "Text",
                       "validators": [],
@@ -105,7 +105,7 @@
                     "body": {
                       "type": "string",
                       "required": false,
-                      "default": "Prompt body",
+                      "default": "",
                       "title": "Prompt body",
                       "inputType": "Text",
                       "validators": [],
@@ -130,7 +130,7 @@
                     "achievementsTitle": {
                       "type": "string",
                       "required": false,
-                      "default": "Drawer title",
+                      "default": "",
                       "title": "Achievements Title",
                       "inputType": "Text",
                       "validators": [],
@@ -140,7 +140,7 @@
                       "type": "string",
                       "required": false,
                       "default": "Throughout this module you can collect {{{maxScore}}} stars. So far you have collected {{{score}}}.",
-                      "title": "Achievements Body",
+                      "title": "",
                       "inputType": "Text",
                       "validators": [],
                       "help": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available",
@@ -149,7 +149,7 @@
                     "certificateTitle": {
                       "type": "string",
                       "required": false,
-                      "default": "Certificate drawer title",
+                      "default": "",
                       "title": "Certificate Drawer Title",
                       "inputType": "Text",
                       "validators": [],
@@ -158,18 +158,20 @@
                     "certificateEnabled": {
                       "type": "string",
                       "required": false,
-                      "default": "Certificate is enabled description",
+                      "default": "",
                       "title": "Description when certificate is unavailable",
                       "inputType": "Text",
-                      "validators": []
+                      "validators": [],
+                      "translatable": true
                     },
                     "certificateDisabled": {
                       "type": "string",
                       "required": false,
-                      "default": "Certificate is disabled description",
+                      "default": "",
                       "title": "Description when certificate is available to view",
                       "inputType": "Text",
-                      "validators": []
+                      "validators": [],
+                      "translatable": true
                     },
                     "_buttons": {
                       "type":"object",
@@ -177,8 +179,8 @@
                       "properties":{
                         "view": {
                           "type": "string",
-                          "required": true,
-                          "default": "View",
+                          "required": false,
+                          "default": "",
                           "title": "View Button Text",
                           "inputType": "Text",
                           "validators": [],
@@ -293,7 +295,7 @@
                   "type":"boolean",
                   "required":false,
                   "default": false,
-                  "title": "Achievements Enabled",
+                  "title": "Is Enabled",
                   "inputType": { "type": "Boolean", "options": [false, true]},
                   "validators": [],
                   "help": "Enables Achievements on the Component"
@@ -321,7 +323,7 @@
                     "_isEnabled": {
                       "type":"boolean",
                       "required":false,
-                      "default": true,
+                      "default": false,
                       "title": "Certificate Button Enabled",
                       "inputType": { "type": "Boolean", "options": [false, true]},
                       "validators": [],
@@ -330,11 +332,10 @@
                     "title": {
                       "type": "string",
                       "required": false,
-                      "default": "Button title",
-                      "title": "Button Title",
-                      "inputType": "TextArea",
+                      "default": "",
+                      "title": "Button Text",
+                      "inputType": "Text",
                       "validators": [],
-                      "help": "Title for the certificate button",
                       "translatable": true
                     }
                   }
