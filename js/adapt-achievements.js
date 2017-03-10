@@ -57,7 +57,6 @@ define([
       Adapt.achievements.userFirstname = "";
       Adapt.achievements.userSurname = "";
       Adapt.achievements.view = "";
-      Adapt.achievements.userLocation = "";
       // Set current date
       this.setCurrentDate();
       // Check saved completion - based on completion date if one has been set
@@ -98,6 +97,8 @@ define([
       }
 
       this.setupNavigationEvent();
+
+      Adapt.achievements.isAvailable = true;
 
     },
 
@@ -140,7 +141,10 @@ define([
     onComponentReady: function(view) {
       if (this.achievementsEnabled && this.certificateEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
         try{
-          new AchievementsComponentView({model:view.model});
+          // Only render view if it DOESN'T already exist - Work around for assessmentResults component
+          if (!$('.' + view.model.get('_id')).find('.achievements-component').length) {
+            new AchievementsComponentView({model:view.model});
+          }
         } catch(e){
           console.log(e);
         }
@@ -148,34 +152,26 @@ define([
     },
 
     showCertificate: function() {
-      // Set users location so it can be returned to when closed
-      if(!(typeof Adapt.offlineStorage.get("location") === "undefined") || (Adapt.offlineStorage.get("location") == "")) {
-        Adapt.achievements.userLocation = Adapt.offlineStorage.get("location");
-      } else {
-        Adapt.achievements.userLocation = "";
-      }
       Adapt.trigger('audio:pauseAudio', 0);
       $('.certificate').removeClass('display-none');
       $('.navigation').addClass('display-none');
+      $('.drawer').addClass('display-none');
       $('#wrapper').css('visibility','hidden');
       $('#wrapper').addClass('noprint');
-      Adapt.scrollTo($('.certificate'));
     },
 
     printCertificate: function() {
-        window.print();
+      this.showCertificate();
+      window.print();
+      this.closeCertificate();
     },
 
     closeCertificate: function() {
         $('.certificate').addClass('display-none');
         $('.navigation').removeClass('display-none');
+        $('.drawer').removeClass('display-none');
         $('#wrapper').removeClass('noprint');
-        if(Adapt.achievements.view == "page" && !Adapt.achievements.userLocation == "") {
-          Adapt.scrollTo($("."+Adapt.achievements.userLocation));
-        }
-        _.defer(_.bind(function() {
-            $('#wrapper').css('visibility','visible');
-        }, this));
+        $('#wrapper').css('visibility','visible');
     },
 
     setCurrentDate: function() {

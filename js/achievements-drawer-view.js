@@ -14,7 +14,7 @@ define(function(require) {
         },
 
         events: {
-          "click .view-button":"viewCertificate"
+          "click .print-button":"printCertificate"
         },
 
         render: function() {
@@ -28,6 +28,7 @@ define(function(require) {
 
         postRender: function() {
             this.listenTo(Adapt, 'drawer:triggerCustomView', this.remove);
+            this.populateCertificate();
             this.updateBody();
             this.checkCompletion();
         },
@@ -37,17 +38,24 @@ define(function(require) {
                 this.$('.text-description').html(Adapt.course.get('_achievements')._drawer.certificateEnabled);
             } else {
                 this.$('.text-description').html(Adapt.course.get('_achievements')._drawer.certificateDisabled);
-                this.$('.view-button').hide();
+                this.$('.certificate-container').hide();
+                this.$('.print-button').hide();
             }
-        },
-
-        viewCertificate: function() {
-          Adapt.trigger('achievements:showCertificate');
-          Adapt.trigger('drawer:closeDrawer');
         },
 
         updateBody: function() {
           this.$('.achievements-drawer-body').html(Adapt.achievements.bodyText);
+        },
+
+        populateCertificate: function() {
+          this.$('.certificate-container').find('.certificate-title').html(Adapt.achievements.courseTitle);
+          this.$('.certificate-container').find('.certificate-name').html(Adapt.achievements.userName);
+          this.$('.certificate-container').find('.certificate-date').html(Adapt.achievements.datePassed);
+        },
+
+        printCertificate: function(event) {
+            if (event) event.preventDefault();
+            Adapt.trigger('achievements:printCertificate');
         }
 
     });

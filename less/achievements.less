@@ -7,7 +7,7 @@ body {
 .certificate {
     background-color: @background-color;
     text-align: center;
-    position: absolute;
+    position: fixed;
     z-index: 600;
     top: 0;
     bottom: 0;
@@ -36,24 +36,8 @@ body {
         }
     }
 
-    .certificate-header {
-        position: relative;
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
-    .certificate-body {
-        position: relative;
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
+    .certificate-header,
+    .certificate-body,
     .certificate-footer {
         position: relative;
         img {
@@ -140,6 +124,48 @@ body {
         margin-top: @drawer-item-padding-top;
         width: 100%;
     }
+
+    .certificate-container {
+      margin-top: @component-padding;
+      border: 1px solid @drawer-item-text-color;
+    }
+
+    .certificate-header,
+    .certificate-body,
+    .certificate-footer {
+        position: relative;
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .certificate-content {
+        position: absolute;
+        width: 100%;
+    }
+
+    .certificate-title {
+        font-weight: @font-weight-bold;
+        color: #000;
+        text-align: center;
+        padding: @component-padding;
+    }
+
+    .certificate-name {
+        font-weight: @font-weight-regular;
+        color: #000;
+        text-align: center;
+    }
+
+    .certificate-date {
+        font-weight: @font-weight-light;
+        color: #000;
+        text-align: center;
+        padding: @component-padding;
+    }
+
 }
 
 .achievements-toggle {
@@ -153,7 +179,7 @@ body {
 		&.center {
 			text-align: center;
 		}
-    }
+  }
 }
 
 .achievements-button {

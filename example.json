@@ -22,7 +22,7 @@
             "certificateEnabled": "The certificate is now available for you to view and print.",
             "certificateDisabled": "The certificate is not available for you yet, please complete the module and return here to view the certificate.",
             "_buttons": {
-                "view": "View"
+                "print": "Print"
             }
         },
         "_certificate": {

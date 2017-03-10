@@ -177,14 +177,14 @@
                       "type":"object",
                       "required":true,
                       "properties":{
-                        "view": {
+                        "print": {
                           "type": "string",
                           "required": false,
                           "default": "",
-                          "title": "View Button Text",
+                          "title": "Print Button Text",
                           "inputType": "Text",
                           "validators": [],
-                          "help": "Enter the text for the button to view the certificate",
+                          "help": "Enter the text for the button to print the certificate",
                           "translatable": true
                         }
                       }
