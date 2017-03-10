@@ -98,8 +98,6 @@ define([
 
       this.setupNavigationEvent();
 
-      Adapt.achievements.isAvailable = true;
-
     },
 
     setupNavigationEvent: function() {
