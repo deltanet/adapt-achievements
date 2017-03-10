@@ -38,9 +38,9 @@ define(function(require) {
           if(Adapt.achievements.isAvailable){
             if(this.model.get('_achievements')._button._isEnabled) {
               this.$('.achievements-inner').show();
+            } else {
+              this.$('.achievements-inner').hide();
             }
-          } else {
-            this.$('.achievements-inner').hide();
           }
         },
 
@@ -63,7 +63,7 @@ define(function(require) {
 
         viewCertificate: function(event) {
             if (event) event.preventDefault();
-            Adapt.trigger('achievements:showCertificate');
+            Adapt.trigger('achievements:showAchievementsDrawer');
         },
 
         removeInViewListeners: function () {
