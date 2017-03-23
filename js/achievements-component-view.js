@@ -35,12 +35,10 @@ define(function(require) {
 
         onCompletion: function() {
           // Show or hide button depending on status
-          if(Adapt.achievements.isAvailable){
-            if(this.model.get('_achievements')._button._isEnabled) {
-              this.$('.achievements-inner').show();
-            } else {
-              this.$('.achievements-inner').hide();
-            }
+          if(Adapt.achievements.isAvailable && this.model.get('_achievements')._button._isEnabled) {
+            this.$('.achievements-inner').show();
+          } else {
+            this.$('.achievements-inner').hide();
           }
         },
 
