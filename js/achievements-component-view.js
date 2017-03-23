@@ -21,7 +21,18 @@ define(function(require) {
         render: function () {
             var data = this.model.toJSON();
             var template = Handlebars.templates["achievementsComponent"];
-            $(this.el).html(template(data)).appendTo('.' + this.model.get('_id') + " > .component-inner");
+
+            // Check if 'extensions' div is already in the DOM
+            if (!$('.' + this.model.get('_id')).find('.extensions').length) {
+              // Create containing div if not already there
+              var newDiv = document.createElement("div");
+              newDiv.setAttribute('class', 'extensions');
+              $(newDiv).appendTo('.' + this.model.get('_id') + " > .component-inner");
+            }
+
+            // Add data
+            $(this.el).html(template(data)).appendTo('.extensions');
+
             this.onCompletion();
 
             _.defer(_.bind(function() {

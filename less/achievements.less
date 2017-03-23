@@ -175,11 +175,19 @@ body {
 }
 
 .achievements-component {
-    .achievements-inner {
-		&.center {
-			text-align: center;
-		}
+  display: inline-block;
+  .achievements-inner {
+    margin-top: @button-margin;
+    padding-left: @component-padding / 2;
+    padding-right: @component-padding / 2;
+  	&.center {
+  		text-align: center;
+  	}
   }
+}
+
+.extensions {
+	text-align: center;
 }
 
 .achievements-button {
