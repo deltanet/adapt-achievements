@@ -70,6 +70,15 @@
                   "validators": [],
                   "help": "Count down completion of achievements"
                 },
+                "_track": {
+                  "type":"string",
+                  "required":true,
+                  "default": "All questions",
+                  "title": "Track type",
+                  "inputType": { "type": "Select", "options": ["All questions", "Assessments"]},
+                  "validators": [],
+                  "help": "Track all question or track specific assessment articles"
+                },
                 "_trackQuestion": {
                   "type":"string",
                   "required":true,
@@ -274,7 +283,40 @@
         "article": {
           "type":"object",
           "properties":{
-
+            "_achievements": {
+              "type":"object",
+              "required": false,
+              "legend": "Achievements",
+              "properties":{
+                "_isEnabled": {
+                  "type":"boolean",
+                  "required": true,
+                  "default": false,
+                  "title": "Is Enabled",
+                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "validators": [],
+                  "help": "Enables questions to be tracked within the Article"
+                },
+                "_id": {
+                  "type": "string",
+                  "required": true,
+                  "title": "Achievements ID",
+                  "default": "",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "Unique name for the achievements article"
+                },
+                "_numQuestions": {
+                  "type": "number",
+                  "required": false,
+                  "default": 0,
+                  "title": "Number of Questions",
+                  "inputType": "Number",
+                  "validators": ["number"],
+                  "help": "The number of questions to be tracked within the article"
+                }
+              }
+            }
           }
         },
         "block": {

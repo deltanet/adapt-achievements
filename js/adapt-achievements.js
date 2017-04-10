@@ -1,10 +1,11 @@
 define([
     'coreJS/adapt',
     './achievements-drawer-view',
+    './achievements-article-view',
     './achievements-component-view',
     './certificate-view',
     './achievements-view'
-], function(Adapt, AchievementsDrawerView, AchievementsComponentView, CertificateView, AchievementsView) {
+], function(Adapt, AchievementsDrawerView, AchievementsArticleView, AchievementsComponentView, CertificateView, AchievementsView) {
 
   var Achievements = _.extend({
 
@@ -24,6 +25,7 @@ define([
     setupEventListeners: function() {
       this.listenTo(Adapt, "router:page router:menu", this.onPageMenuReady);
       this.listenTo(Adapt, "componentView:postRender", this.onComponentReady);
+      this.listenTo(Adapt, "articleView:postRender", this.onArticleReady);
       this.listenTo(Adapt, "achievements:showAchievementsDrawer", this.setupDrawerAchievements);
       this.listenTo(Adapt, 'achievements:showCertificate', this.showCertificate);
       this.listenTo(Adapt, 'achievements:printCertificate', this.printCertificate);
@@ -44,12 +46,23 @@ define([
       }
       // Define achievements model
       Adapt.achievements = {};
+      // Set total score
+      Adapt.achievements.totalScore = 0;
       // Set var for text string to go in the drawer
       Adapt.achievements.bodyText = "";
       // Get question components
       Adapt.achievements.questionComponents;
       Adapt.achievements.isExternallyUpdated = false;
+      // Set up collections
       Adapt.achievements.questionComponents = new Backbone.Collection(Adapt.components.where({_isQuestionType: true}));
+      Adapt.achievements.articles = new Backbone.Collection(Adapt.articles.models);
+      // Create and populate array of Articles with tracked questions
+      Adapt.achievements.questionArticles = new Array();
+      for (var i = 0; i < Adapt.achievements.articles.length; i++) {
+        if(Adapt.achievements.articles.models[i].has("_achievements") && Adapt.achievements.articles.models[i].get("_achievements")._isEnabled) {
+          Adapt.achievements.questionArticles.push(Adapt.achievements.articles.models[i]);
+        }
+      }
       // Set vars for achievements data
       Adapt.achievements.courseTitle = Adapt.course.get('displayTitle');
       Adapt.achievements.userName = Adapt.offlineStorage.get("student");
@@ -143,6 +156,16 @@ define([
           if (!$('.' + view.model.get('_id')).find('.achievements-component').length) {
             new AchievementsComponentView({model:view.model});
           }
+        } catch(e){
+          console.log(e);
+        }
+      }
+    },
+
+    onArticleReady: function(view) {
+      if (this.achievementsEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
+        try{
+          new AchievementsArticleView({model:view.model});
         } catch(e){
           console.log(e);
         }
