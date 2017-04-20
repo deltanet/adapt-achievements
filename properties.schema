@@ -308,7 +308,7 @@
                 },
                 "_numQuestions": {
                   "type": "number",
-                  "required": false,
+                  "required": true,
                   "default": 0,
                   "title": "Number of Questions",
                   "inputType": "Number",

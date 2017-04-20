@@ -31,6 +31,7 @@ define([
       this.listenTo(Adapt, 'achievements:printCertificate', this.printCertificate);
       this.listenTo(Adapt, 'achievements:closeCertificate', this.closeCertificate);
       this.listenTo(Adapt, 'achievements:saveCompletion', this.saveCompletionDate);
+      this.listenTo(Adapt, 'achievements:reviewAssessment', this.reviewAssessment);
       this.listenToOnce(Adapt, 'achievements:showAvailablePrompt', this.showAvailablePrompt);
       // Listen for course completion
       this.listenTo(Adapt.course, 'change:_isComplete', this.onContentCompletion);
@@ -144,8 +145,11 @@ define([
       var achievementsDrawerModel = Adapt.course.get('_achievements');
       var achievementsDrawerModel = new Backbone.Model(achievementsDrawerModel);
 
+      var achievementsReviewCollection = new Backbone.Collection(Adapt.achievements.questionArticles);
+
       Adapt.drawer.triggerCustomView(new AchievementsDrawerView({
-        model: achievementsDrawerModel
+        model: achievementsDrawerModel,
+        collection: achievementsReviewCollection
       }).$el);
     },
 
@@ -212,6 +216,9 @@ define([
     },
 
     onAssessmentCompletion: function() {
+      // Review
+      Adapt.trigger('achievements:showReview');
+      // Certificate
       if(Adapt.course.get('_achievements')._certificate._completionOnPassed && Adapt.course.get('_isAssessmentPassed')) {
         Adapt.achievements.isAvailable = true;
         Adapt.trigger('achievements:showComponentButton');
@@ -235,6 +242,11 @@ define([
         _timeout: Adapt.course.get('_achievements')._completePrompt._displayTime
       };
       Adapt.trigger('notify:push', pushObject);
+    },
+
+    reviewAssessment: function(id) {
+      console.log(id);
+      Adapt.navigateToElement('.' + id, {duration: 500});
     }
 
   }, Backbone.Events);
