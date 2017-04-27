@@ -208,7 +208,7 @@
                     "_isEnabled": {
                       "type":"boolean",
                       "required":false,
-                      "default": true,
+                      "default": false,
                       "title": "Certificate Enabled",
                       "inputType": { "type": "Boolean", "options": [false, true]},
                       "validators": [],
