@@ -1,11 +1,10 @@
 define([
     'coreJS/adapt',
     './achievements-drawer-view',
-    './achievements-article-view',
     './achievements-component-view',
     './certificate-view',
     './achievements-view'
-], function(Adapt, AchievementsDrawerView, AchievementsArticleView, AchievementsComponentView, CertificateView, AchievementsView) {
+], function(Adapt, AchievementsDrawerView, AchievementsComponentView, CertificateView, AchievementsView) {
 
   var Achievements = _.extend({
 
@@ -25,13 +24,11 @@ define([
     setupEventListeners: function() {
       this.listenTo(Adapt, "router:page router:menu", this.onPageMenuReady);
       this.listenTo(Adapt, "componentView:postRender", this.onComponentReady);
-      this.listenTo(Adapt, "articleView:postRender", this.onArticleReady);
       this.listenTo(Adapt, "achievements:showAchievementsDrawer", this.setupDrawerAchievements);
       this.listenTo(Adapt, 'achievements:showCertificate', this.showCertificate);
       this.listenTo(Adapt, 'achievements:printCertificate', this.printCertificate);
       this.listenTo(Adapt, 'achievements:closeCertificate', this.closeCertificate);
       this.listenTo(Adapt, 'achievements:saveCompletion', this.saveCompletionDate);
-      this.listenTo(Adapt, 'achievements:reviewAssessment', this.reviewAssessment);
       this.listenToOnce(Adapt, 'achievements:showAvailablePrompt', this.showAvailablePrompt);
       // Listen for course completion
       this.listenTo(Adapt.course, 'change:_isComplete', this.onContentCompletion);
@@ -70,7 +67,6 @@ define([
       Adapt.achievements.datePassed = "";
       Adapt.achievements.userFirstname = "";
       Adapt.achievements.userSurname = "";
-      Adapt.achievements.view = "";
       // Set current date
       this.setCurrentDate();
       // Check saved completion - based on completion date if one has been set
@@ -126,8 +122,6 @@ define([
       if (this.achievementsEnabled) {
           new CertificateView({model:pageModel});
       }
-      // Set type for achievements close button to reference
-      Adapt.achievements.view = pageModel.get("_type");
     },
 
     addAchievementsDrawerItem: function() {
@@ -145,11 +139,8 @@ define([
       var achievementsDrawerModel = Adapt.course.get('_achievements');
       var achievementsDrawerModel = new Backbone.Model(achievementsDrawerModel);
 
-      var achievementsReviewCollection = new Backbone.Collection(Adapt.achievements.questionArticles);
-
       Adapt.drawer.triggerCustomView(new AchievementsDrawerView({
-        model: achievementsDrawerModel,
-        collection: achievementsReviewCollection
+        model: achievementsDrawerModel
       }).$el);
     },
 
@@ -160,16 +151,6 @@ define([
           if (!$('.' + view.model.get('_id')).find('.achievements-component').length) {
             new AchievementsComponentView({model:view.model});
           }
-        } catch(e){
-          console.log(e);
-        }
-      }
-    },
-
-    onArticleReady: function(view) {
-      if (this.achievementsEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
-        try{
-          new AchievementsArticleView({model:view.model});
         } catch(e){
           console.log(e);
         }
@@ -242,11 +223,6 @@ define([
         _timeout: Adapt.course.get('_achievements')._completePrompt._displayTime
       };
       Adapt.trigger('notify:push', pushObject);
-    },
-
-    reviewAssessment: function(id) {
-      console.log(id);
-      Adapt.navigateToElement('.' + id, {duration: 500});
     }
 
   }, Backbone.Events);

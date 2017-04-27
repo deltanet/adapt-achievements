@@ -42,9 +42,7 @@
     "_achievements": {
       "_isEnabled":true,
       "_id": "Assessment 1",
-      "_numQuestions": 1,
-      "title": "Assessment Title",
-      "description": "Assessment description"
+      "_numQuestions": 1
     }
 
 

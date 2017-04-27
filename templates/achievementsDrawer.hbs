@@ -10,23 +10,6 @@
       </div>
 		</div>
 	</div>
-  <div class="achievements-item-container">
-  {{#each assessment}}
-    <div class="achievements-item drawer-item">
-      <div class="achievements-item-open drawer-item-open">
-    		<div class="drawer-item-title">
-    			<div class="drawer-item-title-inner h5">{{{_achievements._review.title}}}</div>
-    		</div>
-    		<div class="drawer-item-description">
-    			<div class="drawer-item-description-inner">{{{_achievements._review.description}}}</div>
-    		</div>
-    		<div class="drawer-achievements-toggle-inner">
-          <button class="button drawer-review-button" data-id="{{{_id}}}" role="button">{{{_achievements._review.button}}}</button>
-    		</div>
-      </div>
-    </div>
-  {{/each}}
-  </div>
   {{#if model._certificate._isEnabled}}
 	<div class="achievements-item drawer-item">
 		<div role="listitem" class="achievements-item-open drawer-item-open" tabindex="0">

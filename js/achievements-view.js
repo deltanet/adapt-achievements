@@ -12,7 +12,6 @@ define(function(require) {
           this.listenTo(Adapt, "device:resize", this.updateNavButton);
           this.listenTo(Adapt, "device:changed", this.updateNavButton);
           this.listenTo(Adapt.achievements.questionComponents, 'change:_isCorrect', this.updateScore);
-          this.listenTo(Adapt, "achievements:updateAssessment", this.updateAssessment);
           this.render();
         },
 
@@ -38,7 +37,6 @@ define(function(require) {
           }
 
           this.updateNavButton();
-
         },
 
         setUpAssessmentData: function() {
@@ -46,6 +44,7 @@ define(function(require) {
           Adapt.achievements.numTotalQuestions = 0;
           Adapt.achievements.numAssessments = 0;
           // Set up arrays for scores
+          Adapt.achievements.articleQuestions = new Array();
           Adapt.achievements.score = new Array();
           Adapt.achievements.numQuestions = new Array();
           Adapt.achievements.id = new Array();
@@ -57,6 +56,10 @@ define(function(require) {
 
             Adapt.achievements.numTotalQuestions = Adapt.achievements.numTotalQuestions + Adapt.achievements.numQuestions[i];
 
+            Adapt.achievements.articleQuestions[i] = new Backbone.Collection(Adapt.achievements.questionArticles[i].findDescendants("components").where({_isQuestionType: true}));
+
+            this.listenTo(Adapt.achievements.articleQuestions[i], 'change:_isCorrect', this.updateAssessmentScore);
+
             if(Adapt.course.get('_achievements')._countDown) {
               Adapt.achievements.score[i] = Adapt.achievements.numQuestions[i];
             } else {
@@ -64,18 +67,7 @@ define(function(require) {
             }
 
           }
-
-          // If countdown is enabled
-          if(Adapt.course.get('_achievements')._countDown) {
-            Adapt.achievements.totalScore = Adapt.achievements.numTotalQuestions;
-          } else {
-            Adapt.achievements.totalScore = 0;
-          }
-
-          this.showCounter(Adapt.achievements.totalScore);
-
-          this.updateDrawer(Adapt.achievements.totalScore, Adapt.achievements.numTotalQuestions);
-
+          this.updateAssessmentScore();
         },
 
         updateDrawer: function(score, total) {
@@ -89,18 +81,14 @@ define(function(require) {
         },
 
         updateAssessment: function(id, total, score) {
-
           // Change score based on updated data
           for (var i = 0; i < Adapt.achievements.questionArticles.length; i++) {
             if(id == Adapt.achievements.id[i]) {
               Adapt.achievements.score[i] = score;
             }
           }
-
           this.updateCounter();
-
           this.updateDrawer(Adapt.achievements.totalScore, Adapt.achievements.numTotalQuestions);
-
         },
 
         updateCounter: function() {
@@ -115,46 +103,86 @@ define(function(require) {
 
         updateScore: function() {
 
-          var score = 0;
-          var numQuestions = Adapt.achievements.questionComponents.length;
+          if (Adapt.course.get('_achievements')._track !== "Assessments") {
 
-          if(Adapt.course.get('_achievements')._countDown) {
-              score = Adapt.achievements.questionComponents.length;
+            var score = 0;
+            var numQuestions = Adapt.achievements.questionComponents.length;
+
+            if(Adapt.course.get('_achievements')._countDown) {
+                score = Adapt.achievements.questionComponents.length;
+            }
+            // If countdown is enabled
+            if(Adapt.course.get('_achievements')._countDown) {
+                // If the counter is to countdown when a question is correct
+                if(Adapt.course.get('_achievements')._trackQuestion == "correct" || Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
+                    if(Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
+                        score = score - (Adapt.achievements.questionComponents.where({_isCorrect: true}).length + ((Adapt.achievements.questionComponents.where({_isAtLeastOneCorrectSelection: true}).length)/2));
+                    } else {
+                        score = score - (Adapt.achievements.questionComponents.where({_isCorrect: true}).length);
+                    }
+                } else {
+                    // If the counter is to countdown when a question is incorrect
+                    score = score - (Adapt.achievements.questionComponents.where({_isCorrect: false}).length);
+                }
+            } else {
+                // If countdown is NOT enabled just total up the number of correct answers
+                // If the counter is to countdown when a question is correct
+                if(Adapt.course.get('_achievements')._trackQuestion == "correct" || Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
+                    if(Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
+                        score = Adapt.achievements.questionComponents.where({_isCorrect: true}).length + ((Adapt.achievements.questionComponents.where({_isAtLeastOneCorrectSelection: true}).length)/2);
+                    } else {
+                        score = Adapt.achievements.questionComponents.where({_isCorrect: true}).length;
+                    }
+                } else {
+                    // If the counter is to countdown when a question is incorrect
+                    score = Adapt.achievements.questionComponents.where({_isCorrect: false}).length;
+                }
+            }
+            this.showCounter(score);
+            this.updateDrawer(score, numQuestions);
           }
+        },
 
+        questionChanged: function (i) {
+          if(Adapt.course.get('_achievements')._countDown) {
+              Adapt.achievements.score[i] = Adapt.achievements.numQuestions[i];
+          } else {
+            Adapt.achievements.score[i] = 0;
+          }
           // If countdown is enabled
           if(Adapt.course.get('_achievements')._countDown) {
               // If the counter is to countdown when a question is correct
               if(Adapt.course.get('_achievements')._trackQuestion == "correct" || Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
                   if(Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
-                      score = score - (Adapt.achievements.questionComponents.where({_isCorrect: true}).length + ((Adapt.achievements.questionComponents.where({_isAtLeastOneCorrectSelection: true}).length)/2));
+                      Adapt.achievements.score[i] = Adapt.achievements.score[i] - (Adapt.achievements.articleQuestions[i].where({_isCorrect: true}).length + ((Adapt.achievements.articleQuestions[i].where({_isAtLeastOneCorrectSelection: true}).length)/2));
                   } else {
-                      score = score - (Adapt.achievements.questionComponents.where({_isCorrect: true}).length);
+                      Adapt.achievements.score[i] = Adapt.achievements.score[i] - (Adapt.achievements.articleQuestions[i].where({_isCorrect: true}).length);
                   }
               } else {
                   // If the counter is to countdown when a question is incorrect
-                  score = score - (Adapt.achievements.questionComponents.where({_isCorrect: false}).length);
+                  Adapt.achievements.score[i] = Adapt.achievements.score[i] - (Adapt.achievements.articleQuestions[i].where({_isCorrect: false}).length);
               }
           } else {
               // If countdown is NOT enabled just total up the number of correct answers
-
               // If the counter is to countdown when a question is correct
               if(Adapt.course.get('_achievements')._trackQuestion == "correct" || Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
                   if(Adapt.course.get('_achievements')._trackQuestion == "partlyCorrect") {
-                      score = Adapt.achievements.questionComponents.where({_isCorrect: true}).length + ((Adapt.achievements.questionComponents.where({_isAtLeastOneCorrectSelection: true}).length)/2);
+                      Adapt.achievements.score[i] = Adapt.achievements.articleQuestions[i].where({_isCorrect: true}).length + ((Adapt.achievements.articleQuestions[i].where({_isAtLeastOneCorrectSelection: true}).length)/2);
                   } else {
-                      score = Adapt.achievements.questionComponents.where({_isCorrect: true}).length;
+                      Adapt.achievements.score[i] = Adapt.achievements.articleQuestions[i].where({_isCorrect: true}).length;
                   }
               } else {
                   // If the counter is to countdown when a question is incorrect
-                  score = Adapt.achievements.questionComponents.where({_isCorrect: false}).length;
+                  Adapt.achievements.score[i] = Adapt.achievements.articleQuestions[i].where({_isCorrect: false}).length;
               }
           }
+          this.updateAssessment(Adapt.achievements.id[i] , Adapt.achievements.numQuestions[i], Adapt.achievements.score[i]);
+        },
 
-          this.showCounter(score);
-
-          this.updateDrawer(score, numQuestions);
-
+        updateAssessmentScore: function() {
+          for (var i = 0; i < Adapt.achievements.questionArticles.length; i++) {
+            this.questionChanged(i);
+          }
         },
 
         updateNavButton: function() {

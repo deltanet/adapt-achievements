@@ -14,15 +14,13 @@ define(function(require) {
         },
 
         events: {
-          "click .drawer-review-button":"reviewAssessment",
           "click .print-button":"printCertificate"
         },
 
         render: function() {
-            var collectionData = this.collection.toJSON();
             var modelData = this.model.toJSON();
             var template = Handlebars.templates["achievementsDrawer"];
-            this.$el.html(template({model: modelData, assessment:collectionData}));
+            this.$el.html(template({model: modelData}));
 
             _.defer(_.bind(this.postRender, this));
             return this;
@@ -42,6 +40,8 @@ define(function(require) {
                 this.$('.text-description').html(Adapt.course.get('_achievements')._drawer.certificateDisabled);
                 this.$('.certificate-container').hide();
                 this.$('.print-button').hide();
+                // Hide review
+                this.$('.achievements-item-container').hide();
             }
         },
 
@@ -53,12 +53,6 @@ define(function(require) {
           this.$('.certificate-container').find('.certificate-title').html(Adapt.achievements.courseTitle);
           this.$('.certificate-container').find('.certificate-name').html(Adapt.achievements.userName);
           this.$('.certificate-container').find('.certificate-date').html(Adapt.achievements.datePassed);
-        },
-
-        reviewAssessment: function(event) {
-            if (event) event.preventDefault();
-            var id = $(event.currentTarget).data("id");
-            Adapt.trigger('achievements:reviewAssessment', id);
         },
 
         printCertificate: function(event) {
