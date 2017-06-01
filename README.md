@@ -38,17 +38,17 @@ The Achievements attribute group at course level contains values for **_isEnable
 >**_completePrompt** (object): This `_completePrompt` attributes group stores the properties for a Notify Prompt that can be triggered when tracking criteria is met. It contains values for **_isEnabled**, **title**, **body**, and **displayTime**.  
 
 >>**_isEnabled** (boolean):  If set to `true`, a prompt is displayed based on the configuration of the certificate attributes.  
-  
+
 >>**title** (string):  Determines the title text for the prompt.  
 
 >>**body** (string): Determines the body text for the prompt.  
 
->>**displayTime** (number): Determines the time in milliseconds that the prompt is on screen for. The default is `9000`. 
+>>**displayTime** (number): Determines the time in milliseconds that the prompt is on screen for. The default is `9000`.
 
 >**_drawer** (object): This `_drawer` attributes group stores the properties for the Adapt Drawer feature. It contains values for **achievementsTitle**, **achievementsBody**, **certificateTitle**, **certificateEnabled**, **certificateDisabled**, and **_buttons**.  
 
 >>**achievementsTitle** (string):  Determines the title text for the drawer item.  
-  
+
 >>**achievementsBody** (string):  Determines the body text for the drawer item.  
 
 >>**certificateTitle** (string): Determines the title text for the certificate drawer item.  
@@ -66,7 +66,7 @@ The Achievements attribute group at course level contains values for **_isEnable
 >>**_isEnabled** (boolean):  If set to `true`, a certificate will be displayed when the set criteria is met.  
 
 >>**_completionOnPassed** (boolean):  Defines the tracking criteria. If set to `true`, a certificate will be displayed when the course assessment is passed. If set to `false` the certificate will be available when all content is complete.  
-  
+
 >>**_splitNameAt** (string):  Determines how the 'Student' name from Adapt offlinestorage is split. Options are `"comma"`, `"space"`, `"space"`, and `"none"`.  
 
 >>**_switchNames** (boolean):  If set to `true`, the student's first and last name are switched round.  
@@ -84,7 +84,7 @@ The Achievements attribute group at component level contains values for **_isEna
 
 >**_showPrompt** (boolean):  Determines whether the Notify Prompt should display on completion.  
 
->**_classes** (string):  Defines a css class that is included in the theme. 
+>**_classes** (string):  Defines a css class that is included in the theme.
 
 >**_button** (object): This `_button` attributes group stores the properties for a button that can be displayed under the component. It contains values for **_isEnabled**, and **title**.  
 
@@ -94,14 +94,14 @@ The Achievements attribute group at component level contains values for **_isEna
 
 ### Accessibility
 Several elements of **Achievements** have been assigned a label using the [aria-label](https://github.com/adaptlearning/adapt_framework/wiki/Aria-Labels) attribute: **achievements**. These labels are not visible elements. They are utilized by assistive technology such as screen readers. Should the label texts need to be customised, they can be found within the **globals** object in [*properties.schema*](https://github.com/deltanet/adapt-achievements/blob/master/properties.schema).   
-<div float align=right><a href="#top">Back to Top</a></div> 
+<div float align=right><a href="#top">Back to Top</a></div>
 
 ## Limitations
- 
-No known limitations. 
+
+No known limitations.
 
 ----------------------------
-**Version number:**  2.0.11   
+**Version number:**  2.0.12   
 **Framework versions supported:**  ^2.0.6    
 **Author / maintainer:** DeltaNet [contributors](https://github.com/deltanet/adapt-achievements/graphs/contributors)     
 **Accessibility support:** Yes  
