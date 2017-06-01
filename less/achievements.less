@@ -118,11 +118,15 @@ body {
             color: @drawer-item-text-color !important;
         }
     }
-    .drawer-certificate-button {
-        background-color: @drawer-color;
-        color: @button-color;
+    .drawer-certificate-button,
+    .drawer-review-button {
         margin-top: @drawer-item-padding-top;
         width: 100%;
+        color: @button-text-color;
+        background-color: @button-color;
+        .no-touch &:hover {
+            background-color: @button-color-hover;
+        }
     }
 
     .certificate-container {

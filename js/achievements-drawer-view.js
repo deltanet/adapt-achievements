@@ -40,6 +40,8 @@ define(function(require) {
                 this.$('.text-description').html(Adapt.course.get('_achievements')._drawer.certificateDisabled);
                 this.$('.certificate-container').hide();
                 this.$('.print-button').hide();
+                // Hide review
+                this.$('.achievements-item-container').hide();
             }
         },
 

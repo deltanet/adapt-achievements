@@ -7,6 +7,7 @@
         "_showOnNavbar": true,
         "_icon": "icon-star",
         "_countDown": false,
+        "_track": "Assessments", // options are "Assessments" "All questions"
         "_trackQuestion": "correct", // options are "correct" "incorrect" "partlyCorrect"
         "_completePrompt": {
             "_isEnabled": true,
@@ -35,6 +36,15 @@
             "_footer": "course/en/images/certificateFooter.png"
         }
     },
+
+// To go on an article
+
+    "_achievements": {
+      "_isEnabled":true,
+      "_id": "Assessment 1",
+      "_numQuestions": 1
+    }
+
 
 // To go on a component
 

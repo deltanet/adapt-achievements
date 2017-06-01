@@ -44,19 +44,29 @@ define([
       }
       // Define achievements model
       Adapt.achievements = {};
+      // Set total score
+      Adapt.achievements.totalScore = 0;
       // Set var for text string to go in the drawer
       Adapt.achievements.bodyText = "";
       // Get question components
       Adapt.achievements.questionComponents;
       Adapt.achievements.isExternallyUpdated = false;
+      // Set up collections
       Adapt.achievements.questionComponents = new Backbone.Collection(Adapt.components.where({_isQuestionType: true}));
+      Adapt.achievements.articles = new Backbone.Collection(Adapt.articles.models);
+      // Create and populate array of Articles with tracked questions
+      Adapt.achievements.questionArticles = new Array();
+      for (var i = 0; i < Adapt.achievements.articles.length; i++) {
+        if(Adapt.achievements.articles.models[i].has("_achievements") && Adapt.achievements.articles.models[i].get("_achievements")._isEnabled) {
+          Adapt.achievements.questionArticles.push(Adapt.achievements.articles.models[i]);
+        }
+      }
       // Set vars for achievements data
       Adapt.achievements.courseTitle = Adapt.course.get('displayTitle');
       Adapt.achievements.userName = Adapt.offlineStorage.get("student");
       Adapt.achievements.datePassed = "";
       Adapt.achievements.userFirstname = "";
       Adapt.achievements.userSurname = "";
-      Adapt.achievements.view = "";
       // Set current date
       this.setCurrentDate();
       // Check saved completion - based on completion date if one has been set
@@ -112,8 +122,6 @@ define([
       if (this.achievementsEnabled) {
           new CertificateView({model:pageModel});
       }
-      // Set type for achievements close button to reference
-      Adapt.achievements.view = pageModel.get("_type");
     },
 
     addAchievementsDrawerItem: function() {
@@ -189,6 +197,9 @@ define([
     },
 
     onAssessmentCompletion: function() {
+      // Review
+      Adapt.trigger('achievements:showReview');
+      // Certificate
       if(Adapt.course.get('_achievements')._certificate._completionOnPassed && Adapt.course.get('_isAssessmentPassed')) {
         Adapt.achievements.isAvailable = true;
         Adapt.trigger('achievements:showComponentButton');
