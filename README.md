@@ -101,7 +101,7 @@ Several elements of **Achievements** have been assigned a label using the [aria-
 No known limitations.
 
 ----------------------------
-**Version number:**  2.0.12   
+**Version number:**  2.0.13   
 **Framework versions supported:**  ^2.0.6    
 **Author / maintainer:** DeltaNet [contributors](https://github.com/deltanet/adapt-achievements/graphs/contributors)     
 **Accessibility support:** Yes  
