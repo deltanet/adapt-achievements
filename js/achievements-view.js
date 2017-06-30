@@ -191,6 +191,10 @@ define(function(require) {
           } else {
             this.$('.achievements-toggle').addClass('hidden');
           }
+          // Hide score if just the certificate is enabled
+          if(Adapt.course.get('_achievements')._isEnabled == false) {
+            this.$('.achievements-count').hide();
+          }
         },
 
         openDrawer: function() {
