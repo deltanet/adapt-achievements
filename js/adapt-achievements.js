@@ -15,6 +15,17 @@ define([
     onDataReady: function() {
       if (Adapt.course.get("_achievements") && Adapt.course.get("_achievements")._isEnabled) {
         this.achievementsEnabled = Adapt.course.get("_achievements")._isEnabled;
+      } else {
+        this.achievementsEnabled = false;
+      }
+
+      if (Adapt.course.get("_achievements")._certificate && Adapt.course.get("_achievements")._certificate._isEnabled) {
+        this.certificateEnabled = Adapt.course.get("_achievements")._certificate._isEnabled;
+      } else {
+        this.certificateEnabled = false;
+      }
+
+      if (this.achievementsEnabled || this.certificateEnabled) {
         this.setupAchievements();
         this.setupEventListeners();
         this.addAchievementsDrawerItem();
@@ -36,12 +47,6 @@ define([
     },
 
     setupAchievements: function() {
-      // Check if certificate is enabled
-      if (Adapt.course.get("_achievements")._certificate && Adapt.course.get("_achievements")._certificate._isEnabled) {
-        this.certificateEnabled = Adapt.course.get("_achievements")._certificate._isEnabled;
-      } else {
-        this.certificateEnabled = false;
-      }
       // Define achievements model
       Adapt.achievements = {};
       // Set total score
@@ -119,7 +124,7 @@ define([
     },
 
     onPageMenuReady: function(pageModel) {
-      if (this.achievementsEnabled) {
+      if (this.certificateEnabled) {
           new CertificateView({model:pageModel});
       }
     },
@@ -145,7 +150,7 @@ define([
     },
 
     onComponentReady: function(view) {
-      if (this.achievementsEnabled && this.certificateEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
+      if (this.certificateEnabled && view.model && view.model.get("_achievements") && view.model.get("_achievements")._isEnabled) {
         try{
           // Only render view if it DOESN'T already exist - Work around for assessmentResults component
           if (!$('.' + view.model.get('_id')).find('.achievements-component').length) {
