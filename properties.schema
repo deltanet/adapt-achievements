@@ -16,17 +16,17 @@
           "properties":{
             "_achievements": {
               "type":"object",
-              "required":false,
+              "required": false,
               "legend": "Achievements",
               "properties":{
                 "_isEnabled": {
                   "type":"boolean",
-                  "required":false,
+                  "required": false,
                   "default": false,
                   "title": "Is Enabled",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": "Checkbox",
                   "validators": [],
-                  "help": "Enables Achievements Extension"
+                  "help": "Controls whether the Achievements extension is enabled or disabled."
                 },
                   "title": {
                   "type": "string",
@@ -48,10 +48,10 @@
                 },
                 "_showOnNavbar": {
                   "type":"boolean",
-                  "required":false,
+                  "required": false,
                   "default": true,
-                  "title": "Show Achievements Icon on the navigation bar",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "title": "Show Achievements Icon on the navigation bar.",
+                  "inputType": "Checkbox",
                   "validators": []
                 },
                 "_icon": {
@@ -64,43 +64,43 @@
                 },
                 "_countDown": {
                   "type":"boolean",
-                  "required":true,
+                  "required": true,
                   "title": "Count Down",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": "Checkbox",
                   "validators": [],
-                  "help": "Count down completion of achievements"
+                  "help": "Count down completion of achievements."
                 },
                 "_track": {
                   "type":"string",
-                  "required":true,
+                  "required": true,
                   "default": "All questions",
                   "title": "Track type",
                   "inputType": { "type": "Select", "options": ["All questions", "Assessments"]},
                   "validators": [],
-                  "help": "Track all question or track specific assessment articles"
+                  "help": "Track all question or track specific assessment articles."
                 },
                 "_trackQuestion": {
                   "type":"string",
-                  "required":true,
+                  "required": true,
                   "default": "correct",
                   "title": "Track Question Answer",
                   "inputType": { "type": "Select", "options": ["correct", "incorrect", "partlyCorrect"]},
                   "validators": [],
-                  "help": "Track the specified status of the answered questions to total up in the achievements"
+                  "help": "Track the specified status of the answered questions to total up in the achievements."
                 },
                 "_completePrompt": {
                   "type":"object",
-                  "required":true,
+                  "required": true,
                   "title": "Prompt for Completion",
                   "properties":{
                     "_isEnabled": {
                       "type":"boolean",
-                      "required":false,
+                      "required": false,
                       "default": false,
-                      "title": "Completion Prompt Enabled",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
+                      "title": "Is Enabled",
+                      "inputType": "Checkbox",
                       "validators": [],
-                      "help": "Enables a prompt to the user when the certificate is available"
+                      "help": "Enables a prompt to the user when the certificate is available."
                     },
                     "title": {
                       "type": "string",
@@ -122,18 +122,18 @@
                     },
                     "_displayTime": {
                       "type":"number",
-                      "required":true,
+                      "required": true,
                       "default":9000,
                       "title": "Prompt Display Duration",
                       "inputType":"Number",
                       "validators": ["required", "number"],
-                      "help": "Set value to determine how long to show the prompt for"
+                      "help": "Set value to determine how long to show the prompt for."
                     }
                   }
                 },
                 "_drawer": {
                   "type":"object",
-                  "required":true,
+                  "required": true,
                   "title": "Drawer Functionality",
                   "properties":{
                     "achievementsTitle": {
@@ -152,7 +152,7 @@
                       "title": "",
                       "inputType": "Text",
                       "validators": [],
-                      "help": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available",
+                      "help": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available.",
                       "translatable": true
                     },
                     "certificateTitle": {
@@ -184,7 +184,7 @@
                     },
                     "_buttons": {
                       "type":"object",
-                      "required":true,
+                      "required": true,
                       "properties":{
                         "print": {
                           "type": "string",
@@ -193,7 +193,7 @@
                           "title": "Print Button Text",
                           "inputType": "Text",
                           "validators": [],
-                          "help": "Enter the text for the button to print the certificate",
+                          "help": "Enter the text for the button to print the certificate.",
                           "translatable": true
                         }
                       }
@@ -202,71 +202,71 @@
                 },
                 "_certificate": {
                   "type":"object",
-                  "required":false,
+                  "required": false,
                   "title": "Certificate",
                   "properties":{
                     "_isEnabled": {
                       "type":"boolean",
-                      "required":false,
+                      "required": false,
                       "default": false,
-                      "title": "Certificate Enabled",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
+                      "title": "Certificate Is Enabled",
+                      "inputType": "Checkbox",
                       "validators": [],
-                      "help": "Enables the certificate"
+                      "help": "Enables the certificate."
                     },
                     "_completionOnPassed": {
                       "type":"boolean",
-                      "required":false,
+                      "required": false,
                       "default": true,
                       "title": "Completion on Passed",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
+                      "inputType": "Checkbox",
                       "validators": [],
-                      "help": "Set the completion on passed to track the module assessment, if false the certificate will be available on content completion"
+                      "help": "If enabled the completion is based on an assessment, if disabled the certificate will be available on content completion."
                     },
                     "_splitNameAt": {
                       "type":"string",
-                      "required":false,
+                      "required": false,
                       "default": "none",
                       "title": "Split Username",
                       "inputType": { "type": "Select", "options": ["none", "comma", "space", "commaSpace"]},
                       "validators": [],
-                      "help": "Removes unneccesary characters from the username"
+                      "help": "Removes unneccesary characters from the username."
                     },
                     "_switchNames": {
                       "type":"boolean",
-                      "required":false,
+                      "required": false,
                       "default": false,
                       "title": "Switch Name and Surname",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
+                      "inputType": "Checkbox",
                       "validators": [],
-                      "help": "Switches the first name and surname round in the username field"
+                      "help": "Switches the first name and surname round in the username field."
                     },
                     "_header": {
                       "type":"string",
-                      "required":true,
+                      "required": true,
                       "default": "",
                       "title": "Header",
                       "inputType": "Asset:image",
                       "validators": [],
-                      "help": "Add a header image for the certificate"
+                      "help": "Add a header image for the certificate."
                     },
                     "_body": {
                       "type":"string",
-                      "required":true,
+                      "required": true,
                       "default": "",
                       "title": "Body",
                       "inputType": "Asset:image",
                       "validators": [],
-                      "help": "Add a main body background image for the certificate"
+                      "help": "Add a main body background image for the certificate."
                     },
                     "_footer": {
                       "type":"string",
-                      "required":true,
+                      "required": true,
                       "default": "",
                       "title": "Footer",
                       "inputType": "Asset:image",
                       "validators": [],
-                      "help": "Add a footer image for the certificate"
+                      "help": "Add a footer image for the certificate."
                     }
                   }
                 }
@@ -293,9 +293,9 @@
                   "required": true,
                   "default": false,
                   "title": "Is Enabled",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": "Checkbox",
                   "validators": [],
-                  "help": "Enables questions to be tracked within the Article"
+                  "help": "Enables questions to be tracked within the Article."
                 },
                 "_id": {
                   "type": "string",
@@ -304,7 +304,7 @@
                   "default": "",
                   "inputType": "Text",
                   "validators": [],
-                  "help": "Unique name for the achievements article"
+                  "help": "Unique name for the achievements article."
                 },
                 "_numQuestions": {
                   "type": "number",
@@ -313,7 +313,7 @@
                   "title": "Number of Questions",
                   "inputType": "Number",
                   "validators": ["number"],
-                  "help": "The number of questions to be tracked within the article"
+                  "help": "The number of questions to be tracked within the article."
                 }
               }
             }
@@ -330,26 +330,26 @@
           "properties":{
             "_achievements": {
               "type":"object",
-              "required":false,
+              "required": false,
               "legend": "Achievements",
               "properties":{
                 "_isEnabled": {
                   "type":"boolean",
-                  "required":false,
+                  "required": false,
                   "default": false,
                   "title": "Is Enabled",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": "Checkbox",
                   "validators": [],
-                  "help": "Enables Achievements on the Component"
+                  "help": "Enables Achievements on the Component."
                 },
                 "_showPrompt": {
                   "type":"boolean",
-                  "required":false,
+                  "required": false,
                   "default": false,
-                  "title": "Completion Prompt Enabled",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "title": "Completion Prompt Is Enabled",
+                  "inputType": "Checkbox",
                   "validators": [],
-                  "help": "Enables Completion Prompt when the component comes in to view"
+                  "help": "Enables Completion Prompt when the component comes in to view."
                 },
                 "_classes": {
                   "type": "string",
@@ -364,12 +364,12 @@
                   "properties": {
                     "_isEnabled": {
                       "type":"boolean",
-                      "required":false,
+                      "required": false,
                       "default": false,
-                      "title": "Certificate Button Enabled",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
+                      "title": "Certificate Button Is Enabled",
+                      "inputType": "Checkbox",
                       "validators": [],
-                      "help": "Enables the Certificate Button on the Component"
+                      "help": "Enables the Certificate Button on the Component."
                     },
                     "title": {
                       "type": "string",
