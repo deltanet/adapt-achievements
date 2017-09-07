@@ -84,7 +84,7 @@ The Achievements attribute group at component level contains values for **_isEna
 
 >**_showPrompt** (boolean):  Determines whether the Notify Prompt should display on completion.  
 
->**_classes** (string):  Defines a css class that is included in the theme.
+>**_classes** (string):  Defines a css class that is included in the theme.  
 
 >**_button** (object): This `_button` attributes group stores the properties for a button that can be displayed under the component. It contains values for **_isEnabled**, and **title**.  
 
@@ -101,7 +101,7 @@ Several elements of **Achievements** have been assigned a label using the [aria-
 No known limitations.
 
 ----------------------------
-**Version number:**  2.0.14   
+**Version number:**  2.1.0   
 **Framework versions supported:**  ^2.0.6    
 **Author / maintainer:** DeltaNet [contributors](https://github.com/deltanet/adapt-achievements/graphs/contributors)     
 **Accessibility support:** Yes  
