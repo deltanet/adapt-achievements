@@ -12,6 +12,7 @@ define(function(require) {
           this.listenTo(Adapt, "device:resize", this.updateNavButton);
           this.listenTo(Adapt, "device:changed", this.updateNavButton);
           this.listenTo(Adapt.achievements.questionComponents, 'change:_isCorrect', this.updateScore);
+          this.listenTo(Adapt, "accessibility:toggle", this.onAccessibilityChange);
           this.render();
         },
 
@@ -37,6 +38,14 @@ define(function(require) {
           }
 
           this.updateNavButton();
+        },
+
+        onAccessibilityChange: function() {
+          if (Adapt.course.get('_achievements')._track == "Assessments") {
+            this.updateAssessmentScore();
+          } else {
+            this.updateScore();
+          }
         },
 
         setUpAssessmentData: function() {
@@ -77,7 +86,7 @@ define(function(require) {
         },
 
         showCounter: function(totalScore) {
-          this.$('.achievements-count').html(totalScore);
+          this.$('.achievements-count').html(totalScore).a11y_text();
         },
 
         updateAssessment: function(id, total, score) {
@@ -205,6 +214,7 @@ define(function(require) {
         remove: function() {
           this.stopListening(Adapt, "device:resize", this.updateNavButton);
           this.stopListening(Adapt, "device:changed", this.updateNavButton);
+          this.stopListening(Adapt, "accessibility:toggle", this.onAccessibilityChange);
         }
 
     });
