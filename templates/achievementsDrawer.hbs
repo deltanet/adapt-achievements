@@ -1,24 +1,22 @@
 <div class="achievements-inner" role="complementary">
-  {{#if model._isEnabled}}
   <div class="achievements-item drawer-item">
-		<div role="listitem" class="achievements-item-open drawer-item-open" tabindex="0">
+		<div class="achievements-item-open drawer-item-open">
 			<div class="drawer-item-title">
-				<div class="drawer-item-title-inner h5">{{{model._drawer.achievementsTitle}}}</div>
+				<div class="drawer-item-title-inner h5">{{{a11y_text model._drawer.achievementsTitle}}}</div>
 			</div>
       <div class="drawer-item-description">
-        <div class="drawer-item-description-inner achievements-drawer-body">{{{model._drawer.achievementsBody}}}</div>
+        <div class="drawer-item-description-inner achievements-drawer-body">{{{a11y_text model._drawer.achievementsBody}}}</div>
       </div>
 		</div>
 	</div>
-  {{/if}}
   {{#if model._certificate._isEnabled}}
 	<div class="achievements-item drawer-item">
-		<div role="listitem" class="achievements-item-open drawer-item-open" tabindex="0">
+		<div class="achievements-item-open drawer-item-open">
 			<div class="drawer-item-title">
-				<div class="drawer-item-title-inner h5">{{{model._drawer.certificateTitle}}}</div>
+				<div class="drawer-item-title-inner h5">{{{a11y_text model._drawer.certificateTitle}}}</div>
 			</div>
 			<div class="drawer-item-description">
-				<div class="drawer-item-description-inner text-description">{{{model._drawer.certificateDisabled}}}</div>
+				<div class="drawer-item-description-inner text-description">{{{a11y_text model._drawer.certificateDisabled}}}</div>
 			</div>
       <div class="certificate-container">
       	<div class="certificate-header">
@@ -37,7 +35,7 @@
       	</div>
       </div>
 			<div class="drawer-certificate-toggle-inner">
-        <button class="button drawer-certificate-button print-button" role="button">{{{model._drawer._buttons.print}}}</button>
+        <button class="button drawer-certificate-button print-button" role="button" tabindex="0">{{{model._drawer._buttons.print}}}</button>
 			</div>
 		</div>
 	</div>
