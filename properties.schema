@@ -168,7 +168,7 @@
                       "type": "string",
                       "required": false,
                       "default": "",
-                      "title": "Description when certificate is unavailable",
+                      "title": "Description when certificate is available to view.",
                       "inputType": "Text",
                       "validators": [],
                       "translatable": true
@@ -177,7 +177,7 @@
                       "type": "string",
                       "required": false,
                       "default": "",
-                      "title": "Description when certificate is available to view",
+                      "title": "Description when certificate is unavailable.",
                       "inputType": "Text",
                       "validators": [],
                       "translatable": true
