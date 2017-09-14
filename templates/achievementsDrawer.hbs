@@ -1,4 +1,5 @@
 <div class="achievements-inner" role="complementary">
+  {{#if model._achievements._isEnabled}}
   <div class="achievements-item drawer-item">
 		<div class="achievements-item-open drawer-item-open">
 			<div class="drawer-item-title">
@@ -9,6 +10,7 @@
       </div>
 		</div>
 	</div>
+  {{/if}}
   {{#if model._certificate._isEnabled}}
 	<div class="achievements-item drawer-item">
 		<div class="achievements-item-open drawer-item-open">
