@@ -168,7 +168,7 @@
                       "type": "string",
                       "required": false,
                       "default": "",
-                      "title": "Description when certificate is available to view.",
+                      "title": "Description when certificate is available to view",
                       "inputType": "Text",
                       "validators": [],
                       "translatable": true
@@ -177,7 +177,7 @@
                       "type": "string",
                       "required": false,
                       "default": "",
-                      "title": "Description when certificate is unavailable.",
+                      "title": "Description when certificate is unavailable",
                       "inputType": "Text",
                       "validators": [],
                       "translatable": true
@@ -209,7 +209,7 @@
                       "type":"boolean",
                       "required": false,
                       "default": false,
-                      "title": "Certificate Is Enabled",
+                      "title": "Is Enabled",
                       "inputType": "Checkbox",
                       "validators": [],
                       "help": "Enables the certificate."
