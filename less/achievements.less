@@ -1,115 +1,3 @@
-body {
-    @media print {
-        background-color: transparent !important;
-    }
-}
-
-.certificate {
-    background-color: @background-color;
-    text-align: center;
-    position: fixed;
-    z-index: 600;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    @media print {
-        background-color: transparent !important;
-    }
-
-    .certificate-toolbar {
-        position: absolute;
-        top: 0;
-        right: 0;
-        .dir-rtl & {
-            right: auto;
-            left: 0;
-        }
-    }
-
-    .toolbar-button {
-        color: @button-text-color;
-        float: left;
-        .dir-rtl & {
-            float:right;
-        }
-    }
-
-    .certificate-header,
-    .certificate-body,
-    .certificate-footer {
-        position: relative;
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
-    .certificate-content {
-        position: absolute;
-        width: 100%;
-    }
-
-    .certificate-title {
-        font-size: 32px;
-        font-weight: @font-weight-bold;
-        line-height: @title-line-height;
-        color: #000;
-        padding: @component-padding;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 500px;
-
-        // mobile
-        @media all and (max-width: @device-width-small) {
-            font-size: 24px;
-        }
-    }
-
-    .certificate-name {
-        font-size: 24px;
-        font-weight: @font-weight-regular;
-        line-height: @body-line-height;
-        color: #000;
-        padding: @component-padding;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 500px;
-
-        // mobile
-        @media all and (max-width: @device-width-small) {
-            font-size: 18px;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            margin-bottom: 0px;
-        }
-    }
-
-    .certificate-date {
-        font-size: 16px;
-        font-weight: @font-weight-light;
-        line-height: @body-line-height;
-        color: #000;
-        padding: @component-padding;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 500px;
-
-        // mobile
-        @media all and (max-width: @device-width-small) {
-            font-size: 12px;
-        }
-    }
-}
-
-.noprint {
-    @media print {
-        display:none;
-    }
-}
-
 .achievements-drawer {
     .drawer-item-open {
         width: 94% !important;
@@ -118,80 +6,12 @@ body {
             color: @drawer-item-text-color !important;
         }
     }
-    .drawer-certificate-button,
-    .drawer-review-button {
-        margin-top: @drawer-item-padding-top;
-        width: 100%;
-        color: @button-text-color;
-        background-color: @button-color;
-        .no-touch &:hover {
-            background-color: @button-color-hover;
-        }
-    }
-
-    .certificate-container {
-      margin-top: @component-padding;
-      border: 1px solid @drawer-item-text-color;
-    }
-
-    .certificate-header,
-    .certificate-body,
-    .certificate-footer {
-        position: relative;
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
-    .certificate-content {
-        position: absolute;
-        width: 100%;
-    }
-
-    .certificate-title {
-        font-weight: @font-weight-bold;
-        color: #000;
-        text-align: center;
-        padding: @component-padding;
-    }
-
-    .certificate-name {
-        font-weight: @font-weight-regular;
-        color: #000;
-        text-align: center;
-    }
-
-    .certificate-date {
-        font-weight: @font-weight-light;
-        color: #000;
-        text-align: center;
-        padding: @component-padding;
-    }
-
 }
 
 .achievements-toggle {
     &.hidden {
         display: none;
     }
-}
-
-.achievements-component {
-  display: inline-block;
-  .achievements-inner {
-    margin-top: @button-margin;
-    padding-left: @component-padding / 2;
-    padding-right: @component-padding / 2;
-  	&.center {
-  		text-align: center;
-  	}
-  }
-}
-
-.extensions {
-	text-align: center;
 }
 
 .achievements-button {
@@ -203,7 +23,7 @@ body {
 
 .achievements-count {
     padding-top: 5px;
-    color:@primary-color-inverted;
+    color: @primary-color-inverted;
     float: left;
     .dir-rtl & {
         float: right;
@@ -211,45 +31,4 @@ body {
     line-height: @sub-title-line-height;
     font-weight: @font-weight-regular;
     font-size: 16px;
-}
-
-// Ico moon font used for default certificate icon
-@font-face {
-    font-family: 'icomoon';
-    src: url('fonts/icomoon.eot?');
-    src: url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-         url('fonts/icomoon.woff?') format('woff'),
-         url('fonts/icomoon.ttf?') format('truetype'),
-         url('fonts/icomoon.svg?1#fontawesome') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-.certificate-icon {
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    color: @foreground-color;
-    display: block;
-    font-size: @icon-size;
-    text-decoration: none;
-    text-align: center;
-
-    width: (@item-padding * 2) + @icon-size;
-    height: (@item-padding * 2) + @icon-size;
-}
-
-.icon-file-text:before {
-  content: "\e90a";
-}
-.icon-trophy:before {
-  content: "\e90b";
 }

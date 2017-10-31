@@ -1,5 +1,4 @@
 <div class="achievements-inner" role="complementary">
-  {{#if model._isEnabled}}
   <div class="achievements-item drawer-item">
 		<div class="achievements-item-open drawer-item-open">
 			<div class="drawer-item-title">
@@ -10,36 +9,4 @@
       </div>
 		</div>
 	</div>
-  {{/if}}
-  {{#if model._certificate._isEnabled}}
-	<div class="achievements-item drawer-item">
-		<div class="achievements-item-open drawer-item-open">
-			<div class="drawer-item-title">
-				<div class="drawer-item-title-inner h5">{{{a11y_text model._drawer.certificateTitle}}}</div>
-			</div>
-			<div class="drawer-item-description">
-				<div class="drawer-item-description-inner text-description">{{{a11y_text model._drawer.certificateDisabled}}}</div>
-			</div>
-      <div class="certificate-container">
-      	<div class="certificate-header">
-      		<img class="header-background" src="{{{model._certificate._header}}}"/>
-      	</div>
-      	<div class="certificate-body">
-      		<div class="certificate-content">
-      			<div class="certificate-title">Course title</div>
-      			<div class="certificate-name">Student name</div>
-      			<div class="certificate-date">Date</div>
-      		</div>
-      		<img class="body-background" src="{{{model._certificate._body}}}"/>
-      	</div>
-      	<div class="certificate-footer">
-      		<img class="footer-background" src="{{{model._certificate._footer}}}"/>
-      	</div>
-      </div>
-			<div class="drawer-certificate-toggle-inner">
-        <button class="button drawer-certificate-button print-button" role="button" tabindex="0">{{{model._drawer._buttons.print}}}</button>
-			</div>
-		</div>
-	</div>
-  {{/if}}
 </div>

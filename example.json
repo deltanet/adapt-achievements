@@ -9,31 +9,10 @@
         "_countDown": false,
         "_track": "Assessments", // options are "Assessments" "All questions"
         "_trackQuestion": "correct", // options are "correct" "incorrect" "partlyCorrect"
-        "_completePrompt": {
-            "_isEnabled": true,
-            "title": "Certificate",
-            "body": "The certificate is now available for you to view and print.",
-            "_displayTime": 9000
-        },
         "_drawer": {
             "_comment": "In the body - use {{score}}, {{maxScore}} to display the users current score and the total number of questions available",
             "achievementsTitle": "Achievements",
-            "achievementsBody": "Throughout this module you can collect {{{maxScore}}} stars. So far you have collected {{{score}}}.",
-            "certificateTitle": "Certificate",
-            "certificateEnabled": "The certificate is now available for you to view and print.",
-            "certificateDisabled": "The certificate is not available for you yet, please complete the module and return here to view the certificate.",
-            "_buttons": {
-                "print": "Print"
-            }
-        },
-        "_certificate": {
-            "_isEnabled": true,
-            "_completionOnPassed": true,
-            "_splitNameAt" : "comma", // options are "comma" "space" "commaSpace" "none"
-            "_switchNames": false,
-            "_header": "course/en/images/certificateHeader.png",
-            "_body": "course/en/images/certificateBody.png",
-            "_footer": "course/en/images/certificateFooter.png"
+            "achievementsBody": "Throughout this module you can collect {{{maxScore}}} stars. So far you have collected {{{score}}}."
         }
     },
 
@@ -43,17 +22,4 @@
       "_isEnabled":true,
       "_id": "Assessment 1",
       "_numQuestions": 1
-    }
-
-
-// To go on a component
-
-    "_achievements": {
-      "_isEnabled": true,
-      "_showPrompt": true,
-      "_classes": "",
-      "_button": {
-        "_isEnabled": true,
-        "title": "Button title"
-      }
     }
