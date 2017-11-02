@@ -5,7 +5,7 @@ define(function(require) {
 
     var CertificateView = Backbone.View.extend({
 
-        className: 'certificate',
+        className: 'achievements-certificate',
 
         initialize: function() {
             this.listenTo(Adapt, 'remove', this.remove);
@@ -22,7 +22,7 @@ define(function(require) {
             var template = Handlebars.templates["certificateView"];
             this.$el.html(template(data)).prependTo('body');
 
-            $('.certificate').addClass('display-none');
+            $('.achievements-certificate').addClass('display-none');
 
             this.insertImage();
 
@@ -40,9 +40,9 @@ define(function(require) {
         },
 
         populateCertificate: function() {
-          $('.certificate').find('.certificate-title').html(Adapt.achievements.courseTitle);
-          $('.certificate').find('.certificate-name').html(Adapt.achievements.userName);
-          $('.certificate').find('.certificate-date').html(Adapt.achievements.datePassed);
+          $('.achievements-certificate').find('.certificate-title').html(Adapt.achievements.courseTitle);
+          $('.achievements-certificate').find('.certificate-name').html(Adapt.achievements.userName);
+          $('.achievements-certificate').find('.certificate-date').html(Adapt.achievements.datePassed);
         },
 
         printCertificate: function(event) {

@@ -164,7 +164,7 @@ define([
 
     showCertificate: function() {
       Adapt.trigger('audio:pauseAudio', 0);
-      $('.certificate').removeClass('display-none');
+      $('.achievements-certificate').removeClass('display-none');
       $('.navigation').addClass('display-none');
       $('.drawer').addClass('display-none');
       $('#wrapper').css('visibility','hidden');
@@ -178,7 +178,7 @@ define([
     },
 
     closeCertificate: function() {
-        $('.certificate').addClass('display-none');
+        $('.achievements-certificate').addClass('display-none');
         $('.navigation').removeClass('display-none');
         $('.drawer').removeClass('display-none');
         $('#wrapper').removeClass('noprint');
