@@ -206,7 +206,7 @@ define(function(require) {
           }
         },
 
-        openDrawer: function() {
+        openDrawer: function(event) {
           if (event) event.preventDefault();
             Adapt.trigger('achievements:showAchievementsDrawer');
         },
