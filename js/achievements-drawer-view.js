@@ -8,7 +8,6 @@ define(function(require) {
         className: "achievements-drawer",
 
         initialize: function() {
-
             this.listenTo(Adapt, 'remove', this.remove);
             this.render();
         },

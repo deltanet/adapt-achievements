@@ -4,12 +4,12 @@ define([
     './achievements-drawer-view',
     './achievements-component-view',
     './certificate-view'
-], function(Adapt, NavigationView, AchievementsDrawerView, AchievementsComponentView, CertificateView) {
+], function(Adapt, AchievementsNavigationView, AchievementsDrawerView, AchievementsComponentView, CertificateView) {
 
   var Achievements = _.extend({
 
     initialize: function() {
-        this.listenTo(Adapt, "app:dataReady", this.onDataReady);
+        this.listenToOnce(Adapt, "app:dataReady", this.onDataReady);
     },
 
     onDataReady: function() {
@@ -33,7 +33,7 @@ define([
     },
 
     setupEventListeners: function() {
-      this.listenToOnce(Adapt, "menuView:postRender pageView:postRender scoreLevel:addNavigation", this.addNavigation);
+      this.listenTo(Adapt, "navigationView:postRender", this.addNavigation);
       this.listenTo(Adapt, "router:page router:menu", this.onPageMenuReady);
       this.listenTo(Adapt, "componentView:postRender", this.onComponentReady);
       this.listenTo(Adapt, "achievements:showAchievementsDrawer", this.setupDrawerAchievements);
@@ -46,8 +46,9 @@ define([
       this.listenTo(Adapt.course, 'change:_isComplete', this.onContentCompletion);
       this.listenTo(Adapt.course, 'change:_isAssessmentPassed', this.onAssessmentCompletion);
 
-      this.listenTo(Adapt.achievements.questionComponents, 'change:_isCorrect', this.updateScore);
       this.listenTo(Adapt, "accessibility:toggle", this.onAccessibilityChange);
+      // Listen for language change
+      this.listenTo(Adapt.config, 'change:_activeLanguage', this.onLangChange);
     },
 
     setupAchievements: function() {
@@ -70,6 +71,7 @@ define([
           Adapt.achievements.questionArticles.push(Adapt.achievements.articles.models[i]);
         }
       }
+      this.listenTo(Adapt.achievements.questionComponents, 'change:_isCorrect', this.updateScore);
       // Set vars for achievements data
       Adapt.achievements.courseTitle = Adapt.course.get('displayTitle');
       Adapt.achievements.userName = Adapt.offlineStorage.get("student");
@@ -79,12 +81,12 @@ define([
       // Set current date
       this.setCurrentDate();
       // Check saved completion - based on completion date if one has been set
-      if(!(typeof Adapt.offlineStorage.get("achievementsDate") === "undefined") || (Adapt.offlineStorage.get("achievementsDate") == "")) {
-        Adapt.achievements.datePassed = Adapt.offlineStorage.get("achievementsDate");
-        Adapt.achievements.isAvailable = true;
-      } else {
+      if (Adapt.offlineStorage.get("achievementsDate") === "undefined" || Adapt.offlineStorage.get("achievementsDate") === undefined || Adapt.offlineStorage.get("achievementsDate") == "") {
         Adapt.achievements.datePassed = Adapt.achievements.currentDate;
         Adapt.achievements.isAvailable = false;
+      } else {
+        Adapt.achievements.datePassed = Adapt.offlineStorage.get("achievementsDate");
+        Adapt.achievements.isAvailable = true;
       }
 
       var nameArray = [];
@@ -274,12 +276,14 @@ define([
       }
     },
 
-    addNavigation: function() {
-      var model = new Backbone.Model(Adapt.course.get('_achievements'));
-
-      $('.navigation-inner').append(new NavigationView({
-        model: model
-      }).$el);
+    addNavigation: function(navigationView) {
+      if ((this.achievementsEnabled || this.certificateEnabled) && Adapt.course.get('_achievements')._showOnNavbar) {
+        var achievementsModel = Adapt.course.get('_achievements');
+        var achievementsToggleModel = new Backbone.Model(achievementsModel);
+        navigationView.$('.navigation-inner').append(new AchievementsNavigationView({
+          model: achievementsToggleModel
+        }).$el);
+      }
     },
 
     onPageMenuReady: function(pageModel) {
@@ -289,14 +293,16 @@ define([
     },
 
     addAchievementsDrawerItem: function() {
-      var drawerAchievements = Adapt.course.get('_achievements');
+      if (this.achievementsEnabled || this.certificateEnabled) {
+        var drawerAchievements = Adapt.course.get('_achievements');
 
-      var drawerObject = {
-          title: drawerAchievements.title,
-          description: drawerAchievements.description,
-          className: 'achievements-drawer'
-      };
-      Adapt.drawer.addItem(drawerObject, 'achievements:showAchievementsDrawer');
+        var drawerObject = {
+            title: drawerAchievements.title,
+            description: drawerAchievements.description,
+            className: 'achievements-drawer'
+        };
+        Adapt.drawer.addItem(drawerObject, 'achievements:showAchievementsDrawer');
+      }
     },
 
     setupDrawerAchievements: function() {
@@ -387,6 +393,32 @@ define([
         _timeout: Adapt.course.get('_achievements')._completePrompt._displayTime
       };
       Adapt.trigger('notify:push', pushObject);
+    },
+
+    onLangChange: function() {
+      // Reset suspend data
+      Adapt.offlineStorage.set("achievementsDate", "");
+      // Reload
+      this.listenToOnce(Adapt, "app:dataReady", this.checkNewConfig);
+    },
+
+    checkNewConfig: function() {
+      if (Adapt.course.get("_achievements") && Adapt.course.get("_achievements")._isEnabled) {
+        this.achievementsEnabled = true;
+      } else {
+        this.achievementsEnabled = false;
+      }
+      if (Adapt.course.get("_achievements")._certificate && Adapt.course.get("_achievements")._certificate._isEnabled) {
+        this.certificateEnabled = true;
+      } else {
+        this.certificateEnabled = false;
+      }
+
+      if (this.achievementsEnabled || this.certificateEnabled) {
+        this.setupAchievements();
+        //this.setupEventListeners();
+        //this.addAchievementsDrawerItem();
+      }
     }
 
   }, Backbone.Events);

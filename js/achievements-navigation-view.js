@@ -2,12 +2,11 @@ define([
     'coreJS/adapt'
 ], function(Adapt) {
 
-    var NavigationView = Backbone.View.extend({
+    var AchievementsNavigationView = Backbone.View.extend({
 
-        className: 'achievements',
+        className: 'achievements-toggle',
 
         initialize: function() {
-          this.listenTo(Adapt, 'remove', this.remove);
           this.listenTo(Adapt, "device:resize", this.updateNavButton);
           this.listenTo(Adapt, "device:changed", this.updateNavButton);
           this.listenTo(Adapt, 'achievements:updateScore', this.scoreHasUpdated);
@@ -27,6 +26,8 @@ define([
           this.scoreHasUpdated(Adapt.achievements.totalScore);
 
           this.updateNavButton();
+
+          return this;
         },
 
         scoreHasUpdated: function(score) {
@@ -47,10 +48,10 @@ define([
 
         openDrawer: function(event) {
           if (event) event.preventDefault();
-            Adapt.trigger('achievements:showAchievementsDrawer');
+          Adapt.trigger('achievements:showAchievementsDrawer');
         }
 
       });
 
-      return NavigationView;
+      return AchievementsNavigationView;
   })
