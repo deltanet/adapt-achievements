@@ -114,8 +114,8 @@ body {
     .drawer-item-open {
         width: 94% !important;
         .no-touch &:hover {
-            background-color: @drawer-item-color !important;
-            color: @drawer-item-text-color !important;
+            background-color: @drawer-item !important;
+            color: @drawer-item-inverted !important;
         }
     }
     .drawer-certificate-button,
@@ -131,7 +131,7 @@ body {
 
     .certificate-container {
       margin-top: @page-body-margin;
-      border: 1px solid @drawer-item-text-color;
+      border: 1px solid @drawer-item-inverted;
     }
 
     .certificate-header,
