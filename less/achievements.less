@@ -5,7 +5,7 @@ body {
 }
 
 .achievements-certificate {
-    background-color: @background-color;
+    background-color: @background-inverted;
     text-align: center;
     position: fixed;
     z-index: 600;
@@ -29,7 +29,7 @@ body {
     }
 
     .toolbar-button {
-        color: @button-text-color;
+        color: @btn-color-inverted;
         float: left;
         .dir-rtl & {
             float:right;
@@ -57,7 +57,7 @@ body {
         font-weight: @font-weight-bold;
         line-height: @title-line-height;
         color: #000;
-        padding: @component-padding;
+        padding: @page-body-margin;
         margin-left: auto;
         margin-right: auto;
         max-width: 500px;
@@ -73,7 +73,7 @@ body {
         font-weight: @font-weight-regular;
         line-height: @body-line-height;
         color: #000;
-        padding: @component-padding;
+        padding: @page-body-margin;
         margin-left: auto;
         margin-right: auto;
         max-width: 500px;
@@ -92,7 +92,7 @@ body {
         font-weight: @font-weight-light;
         line-height: @body-line-height;
         color: #000;
-        padding: @component-padding;
+        padding: @page-body-margin;
         margin-left: auto;
         margin-right: auto;
         max-width: 500px;
@@ -120,17 +120,17 @@ body {
     }
     .drawer-certificate-button,
     .drawer-review-button {
-        margin-top: @drawer-item-padding-top;
+        margin-top: @drawer-body-margin;
         width: 100%;
-        color: @button-text-color;
-        background-color: @button-color;
+        color: @btn-color-inverted;
+        background-color: @btn-color;
         .no-touch &:hover {
-            background-color: @button-color-hover;
+            background-color: @btn-color-hover;
         }
     }
 
     .certificate-container {
-      margin-top: @component-padding;
+      margin-top: @page-body-margin;
       border: 1px solid @drawer-item-text-color;
     }
 
@@ -154,7 +154,7 @@ body {
         font-weight: @font-weight-bold;
         color: #000;
         text-align: center;
-        padding: @component-padding;
+        padding: @page-body-margin;
     }
 
     .certificate-name {
@@ -167,7 +167,7 @@ body {
         font-weight: @font-weight-light;
         color: #000;
         text-align: center;
-        padding: @component-padding;
+        padding: @page-body-margin;
     }
 
 }
@@ -181,9 +181,9 @@ body {
 .achievements-component {
   display: inline-block;
   .achievements-inner {
-    margin-top: @button-margin;
-    padding-left: @component-padding / 2;
-    padding-right: @component-padding / 2;
+    margin-top: @btn-margin;
+    padding-left: @page-body-margin / 2;
+    padding-right: @page-body-margin / 2;
   	&.center {
   		text-align: center;
   	}
@@ -203,12 +203,12 @@ body {
 
 .achievements-count {
     padding-top: 5px;
-    color:@primary-color-inverted;
+    color:@item-color-inverted;
     float: left;
     .dir-rtl & {
         float: right;
     }
-    line-height: @sub-title-line-height;
+    line-height: @body-line-height;
     font-weight: @font-weight-regular;
     font-size: 16px;
 }
@@ -237,7 +237,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    color: @foreground-color;
+    color: @item-color-inverted;
     display: block;
     font-size: @icon-size;
     text-decoration: none;
